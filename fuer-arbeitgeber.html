@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Für Arbeitgeber – glarc.de</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g-red:#C0392B;--g-red-light:#FBEAEA;--g-red-dark:#922B21;
+  --g-blue:#0C3B6E;--g-blue-mid:#185FA5;--g-blue-light:#E6F1FB;
+  --g-gold:#B8960C;--g-gold-light:#FAF3DC;
+  --gray-50:#F8F8F7;--gray-100:#EBEBEA;--gray-200:#D4D4D2;
+  --gray-400:#888780;--gray-600:#5F5E5A;--gray-800:#2C2C2A;
+}
+body{font-family:'Georgia',serif;color:var(--gray-800);background:#fff;font-size:16px;line-height:1.7}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+.call-fab{position:fixed;bottom:28px;right:28px;z-index:9999;width:58px;height:58px;border-radius:50%;background:var(--g-red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 20px rgba(192,57,43,.45);transition:transform .2s,background .2s;border:none;cursor:pointer;}
+.call-fab:hover{background:var(--g-red-dark);transform:scale(1.1)}
+.call-fab svg{width:26px;height:26px;fill:#fff}
+.search-overlay{display:none;position:fixed;inset:0;background:rgba(12,59,110,.92);z-index:8888;align-items:flex-start;justify-content:center;padding-top:120px;}
+.search-overlay.open{display:flex}
+.search-box-big{width:min(680px,92vw);position:relative}
+.search-box-big input{width:100%;padding:18px 56px 18px 20px;font-size:20px;border:none;border-radius:10px;outline:none;font-family:inherit;background:#fff;color:var(--gray-800);}
+.search-box-big button{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:var(--g-red);border:none;border-radius:7px;padding:8px 12px;cursor:pointer;color:#fff;font-size:16px;}
+.search-close{position:absolute;top:28px;right:32px;color:#fff;font-size:28px;background:none;border:none;cursor:pointer;opacity:.7;}
+.search-close:hover{opacity:1}
+.search-tags{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.search-tags span{background:rgba(255,255,255,.15);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;font-family:sans-serif;transition:background .2s;}
+.search-tags span:hover{background:rgba(255,255,255,.3)}
+nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid var(--gray-100);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:42px;height:42px;border-radius:8px;background:var(--g-blue);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.logo-mark svg{width:28px;height:28px}
+.logo-text{font-family:sans-serif;font-size:17px;font-weight:700;color:var(--g-blue);letter-spacing:-0.3px}
+.logo-text span{color:var(--g-red)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-family:sans-serif;font-size:13px;color:var(--gray-600);letter-spacing:.3px;text-transform:uppercase;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--g-blue)}
+.nav-links a.active{color:var(--g-blue);font-weight:700}
+.btn-search-nav{background:none;border:2px solid var(--g-red);border-radius:7px;padding:9px 18px 9px 14px;display:flex;align-items:center;gap:6px;font-family:sans-serif;font-size:13px;font-weight:600;color:var(--g-red);cursor:pointer;transition:background .2s,color .2s;white-space:nowrap;}
+.btn-search-nav:hover{background:var(--g-red);color:#fff}
+.btn-search-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;flex-shrink:0}
+.btn-cta-nav{background:var(--g-red);color:#fff;font-family:sans-serif;font-size:13px;font-weight:600;padding:9px 18px;border-radius:7px;border:none;cursor:pointer;transition:background .2s;white-space:nowrap;}
+.btn-cta-nav:hover{background:var(--g-red-dark)}
+.container{max-width:1180px;margin:0 auto;padding:0 5%}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:36px;padding-bottom:14px;border-bottom:1px solid var(--gray-100)}
+.section-tag{font-family:sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--g-red);font-weight:800}
+.section-title{font-size:22px;font-weight:700;color:var(--g-blue);letter-spacing:-.3px}
+.section-line{flex:1;height:1px;background:var(--gray-100)}
+.why-section{padding:72px 0;background:#fff}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.why-text h2{font-size:clamp(22px,3vw,34px);font-weight:700;color:var(--g-blue);margin-bottom:16px;line-height:1.25}
+.why-text p{font-size:15px;color:var(--gray-600);line-height:1.7;margin-bottom:20px;font-family:sans-serif}
+.why-traits{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.trait{display:flex;align-items:center;gap:16px;padding:14px 16px;border-radius:8px;background:var(--gray-50);border-left:3px solid var(--g-blue)}
+.trait-icon{font-size:38px;flex-shrink:0;width:54px;display:flex;align-items:center;justify-content:center}
+.trait-text strong{display:block;font-family:sans-serif;font-size:14px;font-weight:600;color:var(--g-blue);margin-bottom:3px}
+.trait-text span{font-family:sans-serif;font-size:13px;color:var(--gray-600)}
+.infographic{background:var(--g-blue);border-radius:12px;padding:32px 28px}
+.info-title{font-family:sans-serif;font-size:16px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:24px;font-weight:700}
+.info-title-gold{color:#DCA94E}
+.info-flags{display:flex;gap:10px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.12)}
+.info-flag{flex:1;background:rgba(255,255,255,.08);border-radius:7px;padding:12px;text-align:center}
+.info-flag-num{font-family:sans-serif;font-size:20px;font-weight:700;color:#fff}
+.info-flag-label{font-family:sans-serif;font-size:11px;color:rgba(255,255,255,.55);margin-top:4px;line-height:1.3}
+.advantages-section{padding:72px 0;background:var(--gray-50)}
+.adv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.adv-card{background:#fff;border:1px solid var(--gray-100);border-radius:10px;padding:28px;transition:box-shadow .2s;text-align:center}
+.adv-card:hover{box-shadow:0 6px 24px rgba(12,59,110,.09)}
+.adv-num{font-family:sans-serif;font-size:11px;letter-spacing:1.5px;color:var(--gray-400);margin-bottom:14px;display:block}
+.adv-icon{font-size:42px;margin-bottom:14px;display:block}
+.adv-card h3{font-size:16px;font-weight:700;color:var(--g-blue);margin-bottom:10px;font-family:sans-serif}
+.adv-card p{font-size:13px;color:var(--gray-600);line-height:1.65;font-family:sans-serif}
+.testimonial-section{padding:72px 0;background:#fff}
+.quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.quote-block{background:var(--gray-50);border-left:4px solid var(--g-gold);border-radius:8px;padding:26px 26px;font-family:Georgia,serif;font-style:italic;color:var(--gray-800);font-size:14.5px;line-height:1.7}
+.quote-block cite{display:block;margin-top:16px;font-family:sans-serif;font-style:normal;font-size:12px;color:var(--gray-600);font-weight:600}
+.subhero{background:var(--g-blue);padding:60px 5% 52px}
+.subhero-eyebrow{font-family:sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px}
+.subhero h1{font-size:clamp(26px,3.2vw,40px);font-weight:700;line-height:1.2;margin-bottom:14px;max-width:680px;color:#fff;letter-spacing:-.4px}
+.subhero p{font-family:sans-serif;font-size:15px;color:rgba(255,255,255,.8);max-width:560px;line-height:1.65;margin-bottom:24px}
+.subhero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-red{background:var(--g-red);color:#fff;font-family:sans-serif;font-size:14px;font-weight:600;padding:12px 22px;border-radius:7px;border:none;cursor:pointer;transition:background .2s}
+.btn-red:hover{background:var(--g-red-dark)}
+.btn-outline-white{background:transparent;color:#fff;font-family:sans-serif;font-size:14px;font-weight:500;padding:12px 22px;border-radius:7px;border:1.5px solid rgba(255,255,255,.35);cursor:pointer;transition:border-color .2s}
+.btn-outline-white:hover{border-color:#fff}
+.cta-banner{background:var(--g-blue);padding:52px 0}
+.cta-banner-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta-banner h2{color:#fff;font-size:23px;margin-bottom:6px;font-weight:700}
+.cta-banner p{color:rgba(255,255,255,.75);font-family:sans-serif;font-size:14px}
+.btn-red-lg{background:var(--g-red);color:#fff;font-family:sans-serif;font-weight:700;font-size:15px;padding:14px 28px;border-radius:8px;white-space:nowrap;transition:background .2s;display:inline-block;border:none;cursor:pointer}
+.btn-red-lg:hover{background:var(--g-red-dark)}
+footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
+.footer-inner{max-width:1180px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1)}
+.footer-logo{font-family:sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:12px}
+.footer-logo span{color:var(--g-gold)}
+.footer-desc{font-family:sans-serif;font-size:13px;line-height:1.65}
+.footer-col h4{font-family:sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}
+.footer-col a{display:block;font-family:sans-serif;font-size:13px;margin-bottom:8px;color:rgba(255,255,255,.65);transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-family:sans-serif;font-size:12px;flex-wrap:wrap;gap:10px}
+.footer-contact a{color:var(--g-gold);font-weight:600}
+@media(max-width:900px){
+  .why-grid,.adv-grid,.quote-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .footer-top{grid-template-columns:1fr}
+  .cta-banner-inner{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<a class="call-fab" href="tel:+491701507650" title="Jetzt anrufen" aria-label="Sofort anrufen">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1v3.5a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1H7.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
+</a>
+
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" onclick="closeSearch()">✕</button>
+  <div class="search-box-big">
+    <input type="text" id="searchInput" placeholder="z. B. Pflegefachkraft, Köche, Auszubildende …">
+    <button onclick="doSearch()">→</button>
+    <div class="search-tags">
+      <span onclick="setSearch('Pflegefachkräfte')">Pflegefachkräfte</span>
+      <span onclick="setSearch('IT-Fachkräfte')">IT-Fachkräfte</span>
+      <span onclick="setSearch('Köche &amp; Gastronomie')">Köche &amp; Gastronomie</span>
+      <span onclick="setSearch('Auszubildende')">Auszubildende</span>
+      <span onclick="setSearch('Handwerk')">Handwerk</span>
+      <span onclick="setSearch('Logistik')">Logistik</span>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-links">
+    <button class="btn-cta-nav" onclick="location.href='index.html#anfrage'">Jetzt anfragen</button>
+    <button class="btn-search-nav" onclick="openSearch()">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+      Suchen
+    </button>
+    <a href="fuer-arbeitgeber.html" class="active">Für Arbeitgeber</a>
+    <a href="service.html">Service</a>
+    <a href="fuer-kandidaten.html">Für Kandidaten</a>
+    <a href="ueber-uns.html">Über uns</a>
+  </div>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-mark">
+      <svg viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="10" stroke="#D4A017" stroke-width="2"></circle>
+        <path d="M8 14 Q14 7 20 14 Q14 21 8 14Z" fill="#D4A017"></path>
+        <circle cx="14" cy="14" r="3" fill="#fff"></circle>
+      </svg>
+    </div>
+    <span class="logo-text">glarc<span>.de</span></span>
+  </a>
+</nav>
+
+<div class="subhero">
+  <div class="container">
+    <div class="subhero-eyebrow">Für Arbeitgeber</div>
+    <h1>Philippinische Fachkräfte für Ihr Unternehmen</h1>
+    <p>Qualifiziert, motiviert und langfristig orientiert: Wir vermitteln Arbeitskräfte von den Philippinen, die zu Ihrem Betrieb passen – inklusive Visumsbindung, Qualifikationsanerkennung und persönlicher Begleitung.</p>
+    <div class="subhero-btns">
+      <button class="btn-red" onclick="location.href='index.html#anfrage'">Fachkräfte anfragen</button>
+      <button class="btn-outline-white" onclick="location.href='service.html'">Unseren Service entdecken</button>
+    </div>
+  </div>
+</div>
+
+<section class="why-section" id="warum">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Fakten</span><span class="section-title">Warum philippinische Fachkräfte?</span><div class="section-line"></div></div>
+    <div class="why-grid">
+      <div class="why-text">
+        <h2>Was Arbeitgeber immer wieder berichten</h2>
+        <p>Die Philippinen zählen weltweit zu den führenden Exportnationen für qualifizierte Arbeitskräfte. Über 10 Millionen Filipinos arbeiten im Ausland – mit nachweislich hoher Zufriedenheit bei Arbeitgebern in Europa, dem Nahen Osten und Asien.</p>
+        <div class="why-traits">
+          <div class="trait"><span class="trait-icon">🏋️</span><div class="trait-text"><strong>Fleißig &amp; zuverlässig</strong><span>Hohe Arbeitsmoral, pünktlich und einsatzbereit auch in anspruchsvollen Situationen</span></div></div>
+          <div class="trait"><span class="trait-icon">🤝</span><div class="trait-text"><strong>Freundlich &amp; teamorientiert</strong><span>Ausgeprägte soziale Kompetenz, hilfsbereit und kommunikationsstark</span></div></div>
+          <div class="trait"><span class="trait-icon">💙</span><div class="trait-text"><strong>Loyal &amp; langfristig orientiert</strong><span>Wunsch nach Stabilität und dauerhafter Verbundenheit mit dem Arbeitgeber</span></div></div>
+          <div class="trait"><span class="trait-icon">🎓</span><div class="trait-text"><strong>Top ausgebildet</strong><span>Hoher Bildungsstandard, viele mit Hochschulabschluss und Berufserfahrung</span></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="infographic">
+          <div class="info-title"><span class="info-title-gold">Arbeitgeberzufriedenheit</span> – Bewertungen aus Deutschland</div>
+          <div style="display:flex;justify-content:center;margin:16px 0">
+            <svg viewBox="0 0 520 480" width="100%" style="max-width:420px">
+              <defs>
+                <linearGradient id="donutA" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#EFC878"></stop>
+                  <stop offset="50%" stop-color="#DCA94E"></stop>
+                  <stop offset="100%" stop-color="#C2913A"></stop>
+                </linearGradient>
+                <filter id="donutShadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#00000040"></feDropShadow>
+                </filter>
+              </defs>
+              <circle cx="260" cy="240" r="100" fill="none" stroke="url(#donutA)" stroke-width="44" stroke-dasharray="125.6 502.4" stroke-dashoffset="0" transform="rotate(-90 260 240)" filter="url(#donutShadow)"></circle>
+              <circle cx="260" cy="240" r="100" fill="none" stroke="url(#donutA)" stroke-width="44" stroke-dasharray="125.6 502.4" stroke-dashoffset="-125.6" transform="rotate(-90 260 240)" filter="url(#donutShadow)"></circle>
+              <circle cx="260" cy="240" r="100" fill="none" stroke="url(#donutA)" stroke-width="44" stroke-dasharray="125.6 502.4" stroke-dashoffset="-251.2" transform="rotate(-90 260 240)" filter="url(#donutShadow)"></circle>
+              <circle cx="260" cy="240" r="100" fill="none" stroke="url(#donutA)" stroke-width="44" stroke-dasharray="125.6 502.4" stroke-dashoffset="-376.8" transform="rotate(-90 260 240)" filter="url(#donutShadow)"></circle>
+              <circle cx="260" cy="240" r="100" fill="none" stroke="url(#donutA)" stroke-width="44" stroke-dasharray="125.6 502.4" stroke-dashoffset="-502.4" transform="rotate(-90 260 240)" filter="url(#donutShadow)"></circle>
+              <line x1="260" y1="162" x2="260" y2="118" stroke="#0C3B6E" stroke-width="3"></line>
+              <line x1="334" y1="216" x2="376" y2="202" stroke="#0C3B6E" stroke-width="3"></line>
+              <line x1="306" y1="303" x2="332" y2="339" stroke="#0C3B6E" stroke-width="3"></line>
+              <line x1="214" y1="303" x2="188" y2="339" stroke="#0C3B6E" stroke-width="3"></line>
+              <line x1="186" y1="216" x2="144" y2="202" stroke="#0C3B6E" stroke-width="3"></line>
+              <text x="347" y="124" text-anchor="start" font-family="sans-serif" font-size="17" font-weight="600" fill="white">Verlässlichkeit &amp;</text>
+              <text x="347" y="145" text-anchor="start" font-family="sans-serif" font-size="17" font-weight="600" fill="white">Pünktlichkeit</text>
+              <text x="384" y="270" text-anchor="start" font-family="sans-serif" font-size="17" font-weight="600" fill="white">Fachliche</text>
+              <text x="384" y="291" text-anchor="start" font-family="sans-serif" font-size="17" font-weight="600" fill="white">Qualifikation</text>
+              <text x="260" y="392" text-anchor="middle" font-family="sans-serif" font-size="17" font-weight="600" fill="white">Deutschkenntnisse</text>
+              <text x="260" y="413" text-anchor="middle" font-family="sans-serif" font-size="17" font-weight="600" fill="white">nach 6 Monaten</text>
+              <text x="136" y="270" text-anchor="end" font-family="sans-serif" font-size="17" font-weight="600" fill="white">Team-</text>
+              <text x="136" y="291" text-anchor="end" font-family="sans-serif" font-size="17" font-weight="600" fill="white">integration</text>
+              <text x="173" y="124" text-anchor="end" font-family="sans-serif" font-size="17" font-weight="600" fill="white">Langfristige</text>
+              <text x="173" y="145" text-anchor="end" font-family="sans-serif" font-size="17" font-weight="600" fill="white">Bindung</text>
+            </svg>
+          </div>
+          <div class="info-flags">
+            <div class="info-flag"><div class="info-flag-num">10 Mio.+</div><div class="info-flag-label">Filipinos arbeiten im Ausland</div></div>
+            <div class="info-flag"><div class="info-flag-num">C2</div><div class="info-flag-label">Englisch-Niveau im Ø</div></div>
+            <div class="info-flag"><div class="info-flag-num">109 Mio.</div><div class="info-flag-label">Einwohner, junges Land</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="advantages-section" id="vorteile">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Für Arbeitgeber</span><span class="section-title">Was Glarc.de für Sie übernimmt</span><div class="section-line"></div></div>
+    <div class="adv-grid">
+      <div class="adv-card"><span class="adv-num">01</span><span class="adv-icon">🔒</span><h3>Planungssicherheit durch Visumsbindung</h3><p>Das Visum der vermittelten Fachkräfte ist an Ihren Betrieb gebunden – kein kurzfristiger Abgang, keine unerwarteten Vakanzen.</p></div>
+      <div class="adv-card"><span class="adv-num">02</span><span class="adv-icon">📋</span><h3>Vollständiger Rundum-Service</h3><p>Kandidatenauswahl, Qualifikationsanerkennung, Flugplanung, Dokumentenorganisation, Behördengänge – alles aus einer Hand.</p></div>
+      <div class="adv-card"><span class="adv-num">03</span><span class="adv-icon">🎯</span><h3>Direkter Zugang zum Netzwerk</h3><p>20 Jahre Präsenz auf den Philippinen sichern uns exklusive Zugänge zu Bildungseinrichtungen, Behörden und Berufsverbänden.</p></div>
+      <div class="adv-card"><span class="adv-num">04</span><span class="adv-icon">🌍</span><h3>3 Standorte in Deutschland</h3><p>Persönliche Ansprechpartner vor Ort in Deutschland für schnelle, unkomplizierte Kommunikation und Betreuung.</p></div>
+      <div class="adv-card"><span class="adv-num">05</span><span class="adv-icon">📈</span><h3>Langfristige Beschäftigung</h3><p>Kein temporärer Einsatz. Unser Ziel ist immer das dauerhafte Arbeitsverhältnis – für beide Seiten.</p></div>
+      <div class="adv-card"><span class="adv-num">06</span><span class="adv-icon">🤲</span><h3>Win-Win durch faire Bedingungen</h3><p>Wir achten auf faire Verträge, menschliche Betreuung und eine echte Perspektive für Arbeitnehmer – das stärkt die Loyalität.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial-section">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Stimmen</span><span class="section-title">Was Arbeitgeber sagen</span><div class="section-line"></div></div>
+    <div class="quote-grid">
+      <div class="quote-block">„Die Visumsbindung gibt uns endlich Planungssicherheit – kein Vergleich zu früheren Vermittlungen."<cite>Inhaberin, Seniorenresidenz</cite></div>
+      <div class="quote-block">„Von der ersten Anfrage bis zur Ankunft hat Glarc.de jeden Schritt begleitet. Das hat uns enorm viel Zeit gespart."<cite>Personalleiter, Hotelbetrieb</cite></div>
+      <div class="quote-block">„Unsere neuen Kollegen aus den Philippinen sind ins Team reingewachsen, als wären sie schon immer dabei gewesen."<cite>Geschäftsführer, Handwerksbetrieb</cite></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container cta-banner-inner">
+    <div>
+      <h2>Bereit für die passende Fachkraft?</h2>
+      <p>Schildern Sie uns Ihren Bedarf – wir melden uns innerhalb von 24 Stunden.</p>
+    </div>
+    <a href="index.html#anfrage" class="btn-red-lg">Jetzt Anfrage stellen</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">glarc<span>.de</span></div>
+        <p class="footer-desc">Globale Arbeitskräftevermittlung. Ihr Partner für philippinische Fachkräfte, Arbeitskräfte und Auszubildende. Bindung durch nachhaltige, erfolgreiche und menschliche Arbeitsverhältnisse.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="fuer-arbeitgeber.html">Für Arbeitgeber</a>
+        <a href="service.html">Service</a>
+        <a href="fuer-kandidaten.html">Für Kandidaten</a>
+        <a href="ueber-uns.html">Über uns</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <a href="tel:+491701507650">+49 170 1507650</a>
+        <a href="mailto:heike.eggers@glarc.de">heike.eggers@glarc.de</a>
+        <a href="https://www.glarc.de">www.glarc.de</a>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 glarc.de – Globale Arbeitskräftevermittlung</span>
+      <span class="footer-contact">Heike Eggers · <a href="tel:+491701507650">+49 170 1507650</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function openSearch(){
+  document.getElementById('searchOverlay').classList.add('open');
+  document.getElementById('searchInput').focus();
+}
+function closeSearch(){
+  document.getElementById('searchOverlay').classList.remove('open');
+}
+function setSearch(v){
+  document.getElementById('searchInput').value = v;
+}
+function doSearch(){
+  var q = document.getElementById('searchInput').value;
+  if(q){ alert('Suche nach: ' + q); }
+  closeSearch();
+}
+document.getElementById('searchOverlay').addEventListener('click', function(e){
+  if(e.target === this){ closeSearch(); }
+});
+</script>
+</body>
+</html>

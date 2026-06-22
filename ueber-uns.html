@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Über uns – glarc.de</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g-red:#C0392B;--g-red-light:#FBEAEA;--g-red-dark:#922B21;
+  --g-blue:#0C3B6E;--g-blue-mid:#185FA5;--g-blue-light:#E6F1FB;
+  --g-gold:#B8960C;--g-gold-light:#FAF3DC;
+  --gray-50:#F8F8F7;--gray-100:#EBEBEA;--gray-200:#D4D4D2;
+  --gray-400:#888780;--gray-600:#5F5E5A;--gray-800:#2C2C2A;
+}
+body{font-family:'Georgia',serif;color:var(--gray-800);background:#fff;font-size:16px;line-height:1.7}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+.call-fab{position:fixed;bottom:28px;right:28px;z-index:9999;width:58px;height:58px;border-radius:50%;background:var(--g-red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 20px rgba(192,57,43,.45);transition:transform .2s,background .2s;border:none;cursor:pointer;}
+.call-fab:hover{background:var(--g-red-dark);transform:scale(1.1)}
+.call-fab svg{width:26px;height:26px;fill:#fff}
+.search-overlay{display:none;position:fixed;inset:0;background:rgba(12,59,110,.92);z-index:8888;align-items:flex-start;justify-content:center;padding-top:120px;}
+.search-overlay.open{display:flex}
+.search-box-big{width:min(680px,92vw);position:relative}
+.search-box-big input{width:100%;padding:18px 56px 18px 20px;font-size:20px;border:none;border-radius:10px;outline:none;font-family:inherit;background:#fff;color:var(--gray-800);}
+.search-box-big button{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:var(--g-red);border:none;border-radius:7px;padding:8px 12px;cursor:pointer;color:#fff;font-size:16px;}
+.search-close{position:absolute;top:28px;right:32px;color:#fff;font-size:28px;background:none;border:none;cursor:pointer;opacity:.7;}
+.search-close:hover{opacity:1}
+.search-tags{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.search-tags span{background:rgba(255,255,255,.15);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;font-family:sans-serif;transition:background .2s;}
+.search-tags span:hover{background:rgba(255,255,255,.3)}
+nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid var(--gray-100);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:42px;height:42px;border-radius:8px;background:var(--g-blue);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.logo-mark svg{width:28px;height:28px}
+.logo-text{font-family:sans-serif;font-size:17px;font-weight:700;color:var(--g-blue);letter-spacing:-0.3px}
+.logo-text span{color:var(--g-red)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-family:sans-serif;font-size:13px;color:var(--gray-600);letter-spacing:.3px;text-transform:uppercase;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--g-blue)}
+.nav-links a.active{color:var(--g-blue);font-weight:700}
+.btn-search-nav{background:none;border:2px solid var(--g-red);border-radius:7px;padding:9px 18px 9px 14px;display:flex;align-items:center;gap:6px;font-family:sans-serif;font-size:13px;font-weight:600;color:var(--g-red);cursor:pointer;transition:background .2s,color .2s;white-space:nowrap;}
+.btn-search-nav:hover{background:var(--g-red);color:#fff}
+.btn-search-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;flex-shrink:0}
+.btn-cta-nav{background:var(--g-red);color:#fff;font-family:sans-serif;font-size:13px;font-weight:600;padding:9px 18px;border-radius:7px;border:none;cursor:pointer;transition:background .2s;white-space:nowrap;}
+.btn-cta-nav:hover{background:var(--g-red-dark)}
+.container{max-width:1180px;margin:0 auto;padding:0 5%}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:36px;padding-bottom:14px;border-bottom:1px solid var(--gray-100)}
+.section-tag{font-family:sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--g-red);font-weight:800}
+.section-title{font-size:22px;font-weight:700;color:var(--g-blue);letter-spacing:-.3px}
+.section-line{flex:1;height:1px;background:var(--gray-100)}
+.mission-section{padding:72px 0;background:#fff}
+.mission-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:start}
+.mission-text h2{font-size:clamp(22px,3vw,30px);font-weight:700;color:var(--g-blue);margin-bottom:16px;line-height:1.25}
+.mission-text p{font-size:15px;color:var(--gray-600);line-height:1.75;margin-bottom:16px;font-family:sans-serif}
+.timeline{position:relative;padding-left:36px;display:flex;flex-direction:column;gap:30px}
+.timeline::before{content:'';position:absolute;left:7px;top:6px;bottom:6px;width:1px;background:var(--gray-100)}
+.timeline-item{position:relative}
+.timeline-item::before{content:'';position:absolute;left:-36px;top:3px;width:15px;height:15px;border-radius:50%;background:var(--g-blue);border:3px solid #fff;box-shadow:0 0 0 1px var(--gray-100)}
+.timeline-year{font-family:sans-serif;font-size:12px;font-weight:700;color:var(--g-red);letter-spacing:1px;margin-bottom:4px}
+.timeline-item h4{font-family:sans-serif;font-size:15px;font-weight:700;color:var(--g-blue);margin-bottom:5px}
+.timeline-item p{font-family:sans-serif;font-size:13px;color:var(--gray-600);line-height:1.6}
+.values-section{padding:72px 0;background:var(--gray-50)}
+.value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.adv-card{background:#fff;border:1px solid var(--gray-100);border-radius:10px;padding:28px;transition:box-shadow .2s;text-align:center}
+.adv-card:hover{box-shadow:0 6px 24px rgba(12,59,110,.09)}
+.adv-icon{font-size:38px;margin-bottom:14px;display:block}
+.adv-card h3{font-size:15px;font-weight:700;color:var(--g-blue);margin-bottom:10px;font-family:sans-serif}
+.adv-card p{font-size:12.5px;color:var(--gray-600);line-height:1.6;font-family:sans-serif}
+.team-section{padding:72px 0;background:#fff}
+.team-card{background:#fff;border:1px solid var(--gray-100);border-radius:12px;padding:32px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.team-avatar{width:88px;height:88px;border-radius:50%;background:var(--g-blue-light);display:flex;align-items:center;justify-content:center;font-size:30px;flex-shrink:0;color:var(--g-blue);font-family:sans-serif;font-weight:700}
+.team-info strong{display:block;font-family:sans-serif;font-size:17px;color:var(--g-blue);margin-bottom:3px}
+.team-info span.role{display:block;font-family:sans-serif;font-size:12.5px;color:var(--gray-400);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.team-info p{font-family:sans-serif;font-size:13.5px;color:var(--gray-600);line-height:1.65;max-width:480px;margin-bottom:14px}
+.team-contacts{display:flex;gap:18px;flex-wrap:wrap}
+.team-contacts a{font-family:sans-serif;font-size:13px;font-weight:600;color:var(--g-blue-mid);display:flex;align-items:center;gap:6px}
+.locations-section{padding:72px 0;background:var(--gray-50)}
+.loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.loc-card{background:#fff;border:1px solid var(--gray-100);border-radius:10px;padding:26px;text-align:center}
+.loc-card .pin{font-size:30px;margin-bottom:10px;display:block}
+.loc-card h3{font-family:sans-serif;font-size:15px;font-weight:700;color:var(--g-blue);margin-bottom:6px}
+.loc-card p{font-family:sans-serif;font-size:12.5px;color:var(--gray-600);line-height:1.6}
+.cta-banner{background:var(--g-blue);padding:52px 0}
+.cta-banner-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta-banner h2{color:#fff;font-size:23px;margin-bottom:6px;font-weight:700}
+.cta-banner p{color:rgba(255,255,255,.75);font-family:sans-serif;font-size:14px}
+.btn-red-lg{background:var(--g-red);color:#fff;font-family:sans-serif;font-weight:700;font-size:15px;padding:14px 28px;border-radius:8px;white-space:nowrap;transition:background .2s;display:inline-block;border:none;cursor:pointer}
+.btn-red-lg:hover{background:var(--g-red-dark)}
+.subhero{background:var(--g-blue);padding:60px 5% 52px}
+.subhero-eyebrow{font-family:sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px}
+.subhero h1{font-size:clamp(26px,3.2vw,40px);font-weight:700;line-height:1.2;margin-bottom:14px;max-width:680px;color:#fff;letter-spacing:-.4px}
+.subhero p{font-family:sans-serif;font-size:15px;color:rgba(255,255,255,.8);max-width:560px;line-height:1.65;margin-bottom:24px}
+.subhero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-red{background:var(--g-red);color:#fff;font-family:sans-serif;font-size:14px;font-weight:600;padding:12px 22px;border-radius:7px;border:none;cursor:pointer;transition:background .2s}
+.btn-red:hover{background:var(--g-red-dark)}
+.btn-outline-white{background:transparent;color:#fff;font-family:sans-serif;font-size:14px;font-weight:500;padding:12px 22px;border-radius:7px;border:1.5px solid rgba(255,255,255,.35);cursor:pointer;transition:border-color .2s}
+.btn-outline-white:hover{border-color:#fff}
+footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
+.footer-inner{max-width:1180px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1)}
+.footer-logo{font-family:sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:12px}
+.footer-logo span{color:var(--g-gold)}
+.footer-desc{font-family:sans-serif;font-size:13px;line-height:1.65}
+.footer-col h4{font-family:sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}
+.footer-col a{display:block;font-family:sans-serif;font-size:13px;margin-bottom:8px;color:rgba(255,255,255,.65);transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-family:sans-serif;font-size:12px;flex-wrap:wrap;gap:10px}
+.footer-contact a{color:var(--g-gold);font-weight:600}
+@media(max-width:900px){
+  .mission-grid,.value-grid,.loc-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .footer-top{grid-template-columns:1fr}
+  .cta-banner-inner{flex-direction:column;align-items:flex-start}
+  .value-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<a class="call-fab" href="tel:+491701507650" title="Jetzt anrufen" aria-label="Sofort anrufen">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1v3.5a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1H7.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
+</a>
+
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" onclick="closeSearch()">✕</button>
+  <div class="search-box-big">
+    <input type="text" id="searchInput" placeholder="z. B. Pflegefachkraft, Köche, Auszubildende …">
+    <button onclick="doSearch()">→</button>
+    <div class="search-tags">
+      <span onclick="setSearch('Pflegefachkräfte')">Pflegefachkräfte</span>
+      <span onclick="setSearch('IT-Fachkräfte')">IT-Fachkräfte</span>
+      <span onclick="setSearch('Köche &amp; Gastronomie')">Köche &amp; Gastronomie</span>
+      <span onclick="setSearch('Auszubildende')">Auszubildende</span>
+      <span onclick="setSearch('Handwerk')">Handwerk</span>
+      <span onclick="setSearch('Logistik')">Logistik</span>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-links">
+    <button class="btn-cta-nav" onclick="location.href='index.html#anfrage'">Jetzt anfragen</button>
+    <button class="btn-search-nav" onclick="openSearch()">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+      Suchen
+    </button>
+    <a href="fuer-arbeitgeber.html">Für Arbeitgeber</a>
+    <a href="service.html">Service</a>
+    <a href="fuer-kandidaten.html">Für Kandidaten</a>
+    <a href="ueber-uns.html" class="active">Über uns</a>
+  </div>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-mark">
+      <svg viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="10" stroke="#D4A017" stroke-width="2"></circle>
+        <path d="M8 14 Q14 7 20 14 Q14 21 8 14Z" fill="#D4A017"></path>
+        <circle cx="14" cy="14" r="3" fill="#fff"></circle>
+      </svg>
+    </div>
+    <span class="logo-text">glarc<span>.de</span></span>
+  </a>
+</nav>
+
+<div class="subhero">
+  <div class="container">
+    <div class="subhero-eyebrow">Über uns</div>
+    <h1>Menschen verbinden, seit über 10 Jahren</h1>
+    <p>Glarc.de steht für persönliche, verlässliche Arbeitsvermittlung zwischen deutschen Unternehmen und philippinischen Fachkräften – mit einem gewachsenen Netzwerk und drei Standorten in Deutschland.</p>
+    <div class="subhero-btns">
+      <button class="btn-red" onclick="location.href='index.html#anfrage'">Jetzt anfragen</button>
+      <button class="btn-outline-white" onclick="location.href='fuer-arbeitgeber.html'">Unser Angebot für Arbeitgeber</button>
+    </div>
+  </div>
+</div>
+
+<section class="mission-section">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Unsere Geschichte</span><span class="section-title">Wie alles begann</span><div class="section-line"></div></div>
+    <div class="mission-grid">
+      <div class="mission-text">
+        <h2>Unsere Mission</h2>
+        <p>Wir glauben, dass erfolgreiche Arbeitsvermittlung mehr ist als das Zusammenbringen von Lebenslauf und Stellenausschreibung. Glarc.de begleitet Menschen und Unternehmen durch den gesamten Prozess – mit Sorgfalt, Transparenz und einem persönlichen Netzwerk, das über 20 Jahre auf den Philippinen gewachsen ist.</p>
+        <p>Aus diesem Netzwerk und der langjährigen Erfahrung in der internationalen Personalvermittlung entstand vor über 10 Jahren glarc.de – mit dem klaren Ziel, deutschen Arbeitgebern verlässlichen Zugang zu qualifizierten philippinischen Fachkräften zu ermöglichen und Arbeitnehmern eine faire, langfristige Perspektive in Deutschland zu bieten.</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-year">Vor über 20 Jahren</div><h4>Aufbau des Netzwerks in Manila</h4><p>Erste persönliche Kontakte zu Bildungseinrichtungen und Berufsverbänden auf den Philippinen.</p></div>
+        <div class="timeline-item"><div class="timeline-year">Gründung</div><h4>glarc.de entsteht</h4><p>Start der spezialisierten Vermittlung philippinischer Fachkräfte für den deutschen Arbeitsmarkt.</p></div>
+        <div class="timeline-item"><div class="timeline-year">Wachstum</div><h4>Drei Standorte in Deutschland</h4><p>Ausbau der persönlichen Betreuung vor Ort für Arbeitgeber und Arbeitnehmer.</p></div>
+        <div class="timeline-item"><div class="timeline-year">Heute</div><h4>3.000+ vermittelte Arbeitnehmer</h4><p>Ein stetig wachsendes Netzwerk und langjährige Partnerschaften mit deutschen Unternehmen.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="values-section">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Werte</span><span class="section-title">Wofür wir stehen</span><div class="section-line"></div></div>
+    <div class="value-grid">
+      <div class="adv-card"><span class="adv-icon">💙</span><h3>Menschlichkeit</h3><p>Hinter jeder Vermittlung steht ein Mensch – mit eigenen Zielen und Bedürfnissen.</p></div>
+      <div class="adv-card"><span class="adv-icon">🔒</span><h3>Verlässlichkeit</h3><p>Was wir zusagen, halten wir – für Arbeitgeber genauso wie für Arbeitnehmer.</p></div>
+      <div class="adv-card"><span class="adv-icon">🔎</span><h3>Transparenz</h3><p>Klare Kommunikation zu Kosten, Abläufen und Zeitplänen, ohne versteckte Bedingungen.</p></div>
+      <div class="adv-card"><span class="adv-icon">🌱</span><h3>Langfristigkeit</h3><p>Wir denken in dauerhaften Arbeitsverhältnissen, nicht in kurzfristigen Vermittlungen.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="team-section">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Ansprechpartnerin</span><span class="section-title">Ihr persönlicher Kontakt</span><div class="section-line"></div></div>
+    <div class="team-card">
+      <div class="team-avatar">HE</div>
+      <div class="team-info">
+        <strong>Heike Eggers</strong>
+        <span class="role">Ansprechpartnerin · glarc.de</span>
+        <p>Heike Eggers begleitet Arbeitgeber und Kandidaten persönlich durch den gesamten Vermittlungsprozess – von der ersten Anfrage bis zur erfolgreichen Integration.</p>
+        <div class="team-contacts">
+          <a href="tel:+491701507650">📞 +49 170 1507650</a>
+          <a href="mailto:heike.eggers@glarc.de">✉️ heike.eggers@glarc.de</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="locations-section">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Standorte</span><span class="section-title">Persönlich vor Ort in Deutschland</span><div class="section-line"></div></div>
+    <div class="loc-grid">
+      <div class="loc-card"><span class="pin">📍</span><h3>Standort Nord</h3><p>Ansprechpartner für Arbeitgeber und Arbeitnehmer im norddeutschen Raum.</p></div>
+      <div class="loc-card"><span class="pin">📍</span><h3>Standort Mitte</h3><p>Zentrale Anlaufstelle für Unternehmen in Mittel- und Westdeutschland.</p></div>
+      <div class="loc-card"><span class="pin">📍</span><h3>Standort Süd</h3><p>Betreuung von Partnerunternehmen im süddeutschen Raum.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container cta-banner-inner">
+    <div>
+      <h2>Lernen Sie uns kennen</h2>
+      <p>Wir freuen uns auf den Austausch mit Ihnen – unverbindlich und persönlich.</p>
+    </div>
+    <a href="index.html#anfrage" class="btn-red-lg">Jetzt Anfrage stellen</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">glarc<span>.de</span></div>
+        <p class="footer-desc">Globale Arbeitskräftevermittlung. Ihr Partner für philippinische Fachkräfte, Arbeitskräfte und Auszubildende. Bindung durch nachhaltige, erfolgreiche und menschliche Arbeitsverhältnisse.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="fuer-arbeitgeber.html">Für Arbeitgeber</a>
+        <a href="service.html">Service</a>
+        <a href="fuer-kandidaten.html">Für Kandidaten</a>
+        <a href="ueber-uns.html">Über uns</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <a href="tel:+491701507650">+49 170 1507650</a>
+        <a href="mailto:heike.eggers@glarc.de">heike.eggers@glarc.de</a>
+        <a href="https://www.glarc.de">www.glarc.de</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="agb.html#agb">AGB</a>
+        <a href="agb.html#datenschutz">Datenschutz</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 glarc.de – Globale Arbeitskräftevermittlung</span>
+      <span class="footer-contact">Heike Eggers · <a href="tel:+491701507650">+49 170 1507650</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function openSearch(){
+  document.getElementById('searchOverlay').classList.add('open');
+  document.getElementById('searchInput').focus();
+}
+function closeSearch(){
+  document.getElementById('searchOverlay').classList.remove('open');
+}
+function setSearch(v){
+  document.getElementById('searchInput').value = v;
+}
+function doSearch(){
+  var q = document.getElementById('searchInput').value;
+  if(q){ alert('Suche nach: ' + q); }
+  closeSearch();
+}
+document.getElementById('searchOverlay').addEventListener('click', function(e){
+  if(e.target === this){ closeSearch(); }
+});
+</script>
+</body>
+</html>

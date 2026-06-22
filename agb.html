@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AGB &amp; Datenschutz – glarc.de</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g-red:#C0392B;--g-red-light:#FBEAEA;--g-red-dark:#922B21;
+  --g-blue:#0C3B6E;--g-blue-mid:#185FA5;--g-blue-light:#E6F1FB;
+  --g-gold:#B8960C;--g-gold-light:#FAF3DC;
+  --gray-50:#F8F8F7;--gray-100:#EBEBEA;--gray-200:#D4D4D2;
+  --gray-400:#888780;--gray-600:#5F5E5A;--gray-800:#2C2C2A;
+}
+body{font-family:'Georgia',serif;color:var(--gray-800);background:#fff;font-size:16px;line-height:1.7}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+.call-fab{position:fixed;bottom:28px;right:28px;z-index:9999;width:58px;height:58px;border-radius:50%;background:var(--g-red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 20px rgba(192,57,43,.45);transition:transform .2s,background .2s;border:none;cursor:pointer;}
+.call-fab:hover{background:var(--g-red-dark);transform:scale(1.1)}
+.call-fab svg{width:26px;height:26px;fill:#fff}
+.search-overlay{display:none;position:fixed;inset:0;background:rgba(12,59,110,.92);z-index:8888;align-items:flex-start;justify-content:center;padding-top:120px;}
+.search-overlay.open{display:flex}
+.search-box-big{width:min(680px,92vw);position:relative}
+.search-box-big input{width:100%;padding:18px 56px 18px 20px;font-size:20px;border:none;border-radius:10px;outline:none;font-family:inherit;background:#fff;color:var(--gray-800);}
+.search-box-big button{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:var(--g-red);border:none;border-radius:7px;padding:8px 12px;cursor:pointer;color:#fff;font-size:16px;}
+.search-close{position:absolute;top:28px;right:32px;color:#fff;font-size:28px;background:none;border:none;cursor:pointer;opacity:.7;}
+.search-close:hover{opacity:1}
+.search-tags{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.search-tags span{background:rgba(255,255,255,.15);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;font-family:sans-serif;transition:background .2s;}
+.search-tags span:hover{background:rgba(255,255,255,.3)}
+nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid var(--gray-100);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:42px;height:42px;border-radius:8px;background:var(--g-blue);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.logo-mark svg{width:28px;height:28px}
+.logo-text{font-family:sans-serif;font-size:17px;font-weight:700;color:var(--g-blue);letter-spacing:-0.3px}
+.logo-text span{color:var(--g-red)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-family:sans-serif;font-size:13px;color:var(--gray-600);letter-spacing:.3px;text-transform:uppercase;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--g-blue)}
+.nav-links a.active{color:var(--g-blue);font-weight:700}
+.btn-search-nav{background:none;border:2px solid var(--g-red);border-radius:7px;padding:9px 18px 9px 14px;display:flex;align-items:center;gap:6px;font-family:sans-serif;font-size:13px;font-weight:600;color:var(--g-red);cursor:pointer;transition:background .2s,color .2s;white-space:nowrap;}
+.btn-search-nav:hover{background:var(--g-red);color:#fff}
+.btn-search-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;flex-shrink:0}
+.btn-cta-nav{background:var(--g-red);color:#fff;font-family:sans-serif;font-size:13px;font-weight:600;padding:9px 18px;border-radius:7px;border:none;cursor:pointer;transition:background .2s;white-space:nowrap;}
+.btn-cta-nav:hover{background:var(--g-red-dark)}
+.container{max-width:1180px;margin:0 auto;padding:0 5%}
+.subhero{background:var(--g-blue);padding:60px 5% 52px}
+.subhero-eyebrow{font-family:sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px}
+.subhero h1{font-size:clamp(26px,3.2vw,40px);font-weight:700;line-height:1.2;margin-bottom:14px;max-width:680px;color:#fff;letter-spacing:-.4px}
+.subhero p{font-family:sans-serif;font-size:15px;color:rgba(255,255,255,.8);max-width:600px;line-height:1.65}
+.legal-doc{padding:56px 0 90px}
+.legal-doc-inner{max-width:760px}
+.legal-toc{display:flex;gap:12px;margin-bottom:8px;flex-wrap:wrap;position:sticky;top:84px;background:#fff;padding:10px 0 18px;z-index:10}
+.legal-toc a{font-family:sans-serif;font-size:13px;font-weight:600;color:var(--g-blue);background:var(--g-blue-light);padding:9px 18px;border-radius:20px;transition:background .2s,color .2s}
+.legal-toc a:hover{background:var(--g-blue);color:#fff}
+.legal-doc h2.doc-title{font-family:Georgia,serif;font-size:25px;color:var(--g-blue);margin:8px 0 6px;padding-top:34px;border-top:2px solid var(--g-gold);scroll-margin-top:140px}
+.legal-doc h2.doc-title:first-of-type{margin-top:0;padding-top:0;border-top:none}
+.legal-doc .doc-sub{font-family:sans-serif;font-size:13.5px;color:var(--gray-600);margin-bottom:24px;font-style:italic}
+.legal-doc h3.part-label{font-family:sans-serif;font-size:11.5px;font-weight:800;color:var(--g-red);text-transform:uppercase;letter-spacing:1.5px;margin:34px 0 16px;padding-bottom:8px;border-bottom:1px solid var(--gray-100)}
+.legal-doc h4{font-family:sans-serif;font-size:14.5px;font-weight:700;color:var(--g-blue);margin:22px 0 8px}
+.legal-doc p{font-family:sans-serif;font-size:13.5px;color:var(--gray-800);line-height:1.8;margin-bottom:13px}
+.legal-doc ul{margin:0 0 13px 20px}
+.legal-doc li{font-family:sans-serif;font-size:13.5px;color:var(--gray-800);line-height:1.75;margin-bottom:6px}
+.legal-doc strong{color:var(--g-blue)}
+.legal-card{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;padding:22px 26px;margin:18px 0}
+.legal-source{font-family:sans-serif;font-size:12px;color:var(--gray-400);margin-top:36px;padding-top:20px;border-top:1px solid var(--gray-100)}
+.legal-source a{color:var(--g-blue-mid);font-weight:600}
+footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
+.footer-inner{max-width:1180px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1)}
+.footer-logo{font-family:sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:12px}
+.footer-logo span{color:var(--g-gold)}
+.footer-desc{font-family:sans-serif;font-size:13px;line-height:1.65}
+.footer-col h4{font-family:sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}
+.footer-col a{display:block;font-family:sans-serif;font-size:13px;margin-bottom:8px;color:rgba(255,255,255,.65);transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-family:sans-serif;font-size:12px;flex-wrap:wrap;gap:10px}
+.footer-contact a{color:var(--g-gold);font-weight:600}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<a class="call-fab" href="tel:+491701507650" title="Jetzt anrufen" aria-label="Sofort anrufen">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1v3.5a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1H7.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
+</a>
+
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" onclick="closeSearch()">✕</button>
+  <div class="search-box-big">
+    <input type="text" id="searchInput" placeholder="z. B. Pflegefachkraft, Köche, Auszubildende …">
+    <button onclick="doSearch()">→</button>
+    <div class="search-tags">
+      <span onclick="setSearch('Pflegefachkräfte')">Pflegefachkräfte</span>
+      <span onclick="setSearch('IT-Fachkräfte')">IT-Fachkräfte</span>
+      <span onclick="setSearch('Köche &amp; Gastronomie')">Köche &amp; Gastronomie</span>
+      <span onclick="setSearch('Auszubildende')">Auszubildende</span>
+      <span onclick="setSearch('Handwerk')">Handwerk</span>
+      <span onclick="setSearch('Logistik')">Logistik</span>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-links">
+    <button class="btn-cta-nav" onclick="location.href='index.html#anfrage'">Jetzt anfragen</button>
+    <button class="btn-search-nav" onclick="openSearch()">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+      Suchen
+    </button>
+    <a href="fuer-arbeitgeber.html">Für Arbeitgeber</a>
+    <a href="service.html">Service</a>
+    <a href="fuer-kandidaten.html">Für Kandidaten</a>
+    <a href="ueber-uns.html">Über uns</a>
+  </div>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-mark">
+      <svg viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="10" stroke="#D4A017" stroke-width="2"></circle>
+        <path d="M8 14 Q14 7 20 14 Q14 21 8 14Z" fill="#D4A017"></path>
+        <circle cx="14" cy="14" r="3" fill="#fff"></circle>
+      </svg>
+    </div>
+    <span class="logo-text">glarc<span>.de</span></span>
+  </a>
+</nav>
+
+<div class="subhero">
+  <div class="container">
+    <div class="subhero-eyebrow">Rechtliches</div>
+    <h1>AGB &amp; Datenschutz</h1>
+    <p>Allgemeine Geschäftsbedingungen für Arbeitsagentur und Sprachschule sowie der Datenschutzhinweis für Arbeitgeber (B2B) von glarc.de.</p>
+  </div>
+</div>
+
+<section class="legal-doc">
+  <div class="container">
+    <div class="legal-doc-inner">
+
+      <div class="legal-toc">
+        <a href="#agb">Zu den AGB</a>
+        <a href="#datenschutz">Zum Datenschutzhinweis</a>
+      </div>
+
+      <h2 class="doc-title" id="agb">Allgemeine Geschäftsbedingungen (AGB)</h2>
+      <p class="doc-sub">Kleingedrucktes muss nicht immer klein sein. Für uns ist Transparenz wichtig.</p>
+      <p>Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Dienstleistungen der Firma <strong>glarc.de</strong>, Inhaber Hans Tuchel, mit Sitz in Im Weingarten 18, 56818 Klotten, Deutschland (im Folgenden „Agentur/Schule"). Auftraggeber können Privatpersonen, Unternehmen sowie öffentliche Einrichtungen sein.</p>
+
+      <h3 class="part-label">Teil A – Arbeitsagentur</h3>
+
+      <h4>1. Geltungsbereich</h4>
+      <p>Diese AGB gelten für alle Verträge der Arbeitsagentur mit Privatpersonen, Firmenkunden und Behörden.</p>
+
+      <h4>2. Vertragsgegenstand</h4>
+      <p>Die Agentur erbringt Dienstleistungen im Bereich Personalvermittlung, Beratung und Unterstützung bei Arbeitsverhältnissen. Ein Vermittlungserfolg wird nicht geschuldet.</p>
+
+      <h4>3. Grundsatzerklärung und faire Rekrutierung</h4>
+      <p>Die Agentur verpflichtet sich zur Einhaltung der Grundsätze fairer, transparenter und nachhaltiger internationaler Rekrutierung. Dies umfasst insbesondere:</p>
+      <ul>
+        <li>die Einhaltung der Leitprinzipien des einschlägigen Gütesiegelrahmens</li>
+        <li>die Unentgeltlichkeit des Vermittlungsprozesses für Pflegefachpersonen</li>
+        <li>die Begrenzung des wirtschaftlichen Risikos für Pflegefachpersonen</li>
+        <li>Transparenz hinsichtlich Strukturen, Leistungen und Kosten</li>
+        <li>Nachhaltigkeit und Partizipation</li>
+        <li>die Gesamtverantwortung für die vollständige Dienstleistungskette</li>
+        <li>die Einhaltung des WHO Global Code of Practice on the International Recruitment of Health Personnel</li>
+        <li>die Achtung internationaler Menschenrechtsstandards, insbesondere der ILO-Kernarbeitsnormen, der ILO General Principles and Operational Guidelines for Fair Recruitment, der UN Guiding Principles on Business and Human Rights sowie einschlägiger internationaler Menschenrechtsabkommen</li>
+      </ul>
+      <p>Die Agentur erhebt weder direkt noch indirekt Vermittlungskosten noch Kosten für unmittelbar mit der Vermittlung zusammenhängende Leistungen von Pflegefachpersonen.</p>
+
+      <h4>4. Pflichten des Auftraggebers</h4>
+      <p>Der Auftraggeber verpflichtet sich, alle notwendigen Informationen vollständig und wahrheitsgemäß bereitzustellen. Änderungen sind unverzüglich mitzuteilen.</p>
+      <p>Arbeitgeber verpflichten sich ferner, im Rahmen des rechtlich und betrieblich Möglichen geeignete Maßnahmen und Instrumente zur betrieblichen und sozialen Integration, zur Sprachförderung sowie zur Begleitung während der Einarbeitung vorzuhalten.</p>
+
+      <h4>5. Vergütung und Zahlungsbedingungen</h4>
+      <p>Rechnungen sind innerhalb von <strong>7 Tagen</strong> zahlbar. Bei Verzug können Verzugszinsen in gesetzlicher Höhe sowie, soweit gesetzlich zulässig, eine Verzugspauschale von 40,00 € erhoben werden.</p>
+      <p>Soweit Leistungen im Bereich der Vermittlung von Pflegefachpersonen erbracht werden, dürfen Pflegefachpersonen selbst keine Vermittlungsgebühren oder unmittelbar vermittlungsbezogene Kosten auferlegt werden.</p>
+
+      <h4>6. Datenschutz und Vertraulichkeit</h4>
+      <p>Die Agentur verarbeitet personenbezogene Daten ausschließlich nach Maßgabe der DSGVO, des BDSG und sonstiger anwendbarer Datenschutzvorschriften. Eine Weitergabe erfolgt nur, wenn dies gesetzlich vorgeschrieben, zur Vertragserfüllung erforderlich oder auf sonstiger rechtlicher Grundlage zulässig ist.</p>
+      <p>Zur Unterstützung interner Abläufe, Kommunikation, Übersetzungen, Dokumentenerstellung, Qualitätskontrolle und administrativer Prozesse können KI-gestützte Werkzeuge eingesetzt werden. Es erfolgen keine ausschließlich automatisierten Entscheidungen mit Rechtswirkung oder ähnlich erheblicher Beeinträchtigung im Sinne von Art. 22 DSGVO. Soweit externe Anbieter Zugriff auf personenbezogene Daten erhalten, erfolgt dies ausschließlich auf geeigneter datenschutzrechtlicher Grundlage und – soweit erforderlich – unter Abschluss eines Auftragsverarbeitungsvertrags sowie unter Beachtung etwaiger Drittlandsvorgaben.</p>
+
+      <h4>7. Haftung</h4>
+      <p>Die Agentur haftet unbeschränkt bei Vorsatz und grober Fahrlässigkeit sowie bei schuldhafter Verletzung von Leben, Körper oder Gesundheit.</p>
+      <p>Bei leicht fahrlässiger Verletzung wesentlicher Vertragspflichten (Kardinalpflichten) ist die Haftung der Agentur auf den vertragstypischen, vorhersehbaren Schaden begrenzt. Wesentliche Vertragspflichten sind solche, deren Erfüllung die ordnungsgemäße Durchführung des Vertrags überhaupt erst ermöglicht und auf deren Einhaltung der Auftraggeber regelmäßig vertrauen darf. Im Übrigen ist die Haftung bei leichter Fahrlässigkeit ausgeschlossen. Die Haftung nach zwingenden gesetzlichen Vorschriften, insbesondere nach dem Produkthaftungsgesetz, bleibt unberührt.</p>
+
+      <h4>8. Mitwirkung von Behörden und Anerkennungsverfahren</h4>
+      <p>Für Bearbeitungszeiten und Entscheidungen von Behörden übernimmt die Agentur keine Haftung.</p>
+      <p>Soweit für bestimmte Berufe ein gesetzliches Anerkennungsverfahren in Deutschland erforderlich ist, gelten ausschließlich die jeweils einschlägigen gesetzlichen Regelungen und behördlichen Vorgaben. Die Agentur schuldet keinen bestimmten Ausgang eines Anerkennungs-, Visa- oder sonstigen Verwaltungsverfahrens.</p>
+
+      <h4>9. Urheber- und Nutzungsrechte</h4>
+      <p>Von der Agentur erstellte Unterlagen, Konzepte, Vorlagen, Texte und sonstige Arbeitsergebnisse bleiben, soweit nicht ausdrücklich etwas anderes vereinbart ist, geistiges Eigentum der Agentur. Eine Nutzung ist nur für eigene interne Zwecke des Auftraggebers und nur im Rahmen des Vertragszwecks gestattet.</p>
+
+      <h4>10. Bindungs- und Rückzahlungsklauseln</h4>
+      <p>Die Agentur verzichtet in ihren Vermittlungsverträgen auf unzulässige Bindungs- und Rückzahlungsvereinbarungen. Insbesondere werden keine Vereinbarungen getroffen oder unterstützt, nach denen Pflegefachpersonen Vermittlungskosten oder unmittelbar mit der Vermittlung zusammenhängende Kosten ganz oder teilweise zurückzahlen müssen.</p>
+      <p>Die Agentur vermittelt nicht in Arbeitsverhältnisse, die Bindungs- oder Rückzahlungsverpflichtungen enthalten, soweit sich diese auf Vermittlungskosten oder auf unmittelbar mit der Vermittlung zusammenhängende Leistungen beziehen.</p>
+      <p>Soweit in anderen rechtlich zulässigen Fällen Bindungs- oder Rückzahlungsklauseln vereinbart werden, müssen diese transparent, verhältnismäßig, überprüfbar und mit dem geltenden Recht vereinbar sein.</p>
+
+      <h4>11. Prüfvorbehalt und Beschwerdehinweise</h4>
+      <p>Die Agentur behält sich vor, die Einhaltung dieser AGB sowie der hierin enthaltenen Grundsatzerklärung allgemein oder anlassbezogen zu überprüfen. Auftraggeber sind verpflichtet, an einer solchen Überprüfung in zumutbarem Umfang mitzuwirken und die hierfür erforderlichen Informationen bereitzustellen.</p>
+      <p>Hinweise auf mögliche Verstöße gegen diese AGB oder gegen Grundsätze fairer Rekrutierung können der Agentur in Textform mitgeteilt werden. Die Agentur wird eingehende Hinweise angemessen prüfen und – soweit erforderlich – geeignete Abhilfemaßnahmen ergreifen.</p>
+
+      <h4>12. Laufzeit, Kündigung und Rücktritt</h4>
+      <p>Die Laufzeit ergibt sich aus dem Einzelvertrag. Das Recht zur außerordentlichen Kündigung aus wichtigem Grund bleibt unberührt.</p>
+      <p>Ein wiederholter oder schwerwiegender Verstoß gegen diese AGB, insbesondere gegen die Grundsatzerklärung, die Vorgaben zur Unentgeltlichkeit des Vermittlungsprozesses, die Regelungen zu Bindungs- und Rückzahlungsklauseln oder gegen wesentliche Grundsätze fairer Rekrutierung, berechtigt die Agentur zur außerordentlichen Kündigung oder – soweit rechtlich möglich – zum Rücktritt vom Vertrag.</p>
+      <p>Die Agentur ist ferner berechtigt, einen Vertrag außerordentlich zu kündigen oder von ihm zurückzutreten, wenn der Auftraggeber unzulässige Bindungs- oder Rückzahlungsregelungen verwendet oder aufrechterhält und diese trotz Aufforderung nicht innerhalb angemessener Frist abstellt.</p>
+
+      <h4>13. Freiwilligkeit von Zusatzleistungen und Arbeitsplatzentscheidung</h4>
+      <p>Angebotene Arbeitsplätze können von Kandidatinnen und Kandidaten abgelehnt werden.</p>
+      <p>Zusätzliche Leistungen der Agentur, die nicht zwingend für die Durchführung der Vermittlung erforderlich sind, können – soweit gesetzlich zulässig – gesondert angeboten werden. Die Inanspruchnahme solcher Leistungen ist freiwillig und darf nicht zur Voraussetzung für eine Vermittlung gemacht werden, sofern gesetzlich nichts anderes vorgeschrieben ist.</p>
+
+      <h3 class="part-label">Teil B – Sprachschule</h3>
+
+      <h4>14. Anmeldung und Vertragsschluss</h4>
+      <p>Die Anmeldung ist verbindlich und wird mit Bestätigung durch die Sprachschule wirksam.</p>
+
+      <h4>15. Teilnahmegebühren und Zahlungsbedingungen</h4>
+      <p>Die Gebühren sind vor Kursbeginn zu zahlen. Ratenzahlungen bedürfen gesonderter Vereinbarung.</p>
+
+      <h4>16. Rücktritt, Kündigung, Stornierung</h4>
+      <p>Ein Rücktritt ist bis 14 Tage vor Kursbeginn kostenfrei möglich. Danach gelten folgende Stornokosten: bis 7 Tage vor Kursbeginn 50 % der vereinbarten Gebühr, ab weniger als 7 Tagen vor Kursbeginn oder nach Kursbeginn 100 %. Das Recht zur außerordentlichen Kündigung aus wichtigem Grund bleibt unberührt.</p>
+
+      <h4>17. Kursorganisation und Unterrichtsausfall</h4>
+      <p>Kurse können bei zu geringer Teilnehmerzahl, aus organisatorischen Gründen oder aus wichtigem Grund abgesagt oder verschoben werden. Bereits gezahlte Gebühren für nicht erbrachte Leistungen werden in diesem Fall erstattet; weitergehende Ansprüche bestehen nur im Rahmen von Ziffer 7. Unterrichtsausfall wird nach Möglichkeit nachgeholt oder online ersetzt.</p>
+
+      <h4>18. Online-Unterricht</h4>
+      <p>Die technische Ausstattung und eine ausreichende Internetverbindung obliegen den Teilnehmern. Soweit ein Termin aus Gründen ausfällt, die allein aus der Sphäre des Teilnehmers stammen, besteht kein Anspruch auf Erstattung.</p>
+
+      <h4>19. Unterrichtsmaterialien</h4>
+      <p>Unterrichtsmaterialien sind urheberrechtlich geschützt und dürfen ohne vorherige Zustimmung der Sprachschule weder vervielfältigt noch an Dritte weitergegeben oder öffentlich zugänglich gemacht werden.</p>
+
+      <h4>20. Teilnahmebescheinigung</h4>
+      <p>Teilnehmer erhalten auf Wunsch oder nach Maßgabe des jeweiligen Angebots eine Teilnahmebescheinigung. Ein Bestehen externer Prüfungen oder die Anerkennung durch Dritte wird nicht garantiert.</p>
+
+      <h3 class="part-label">Teil C – Schlussbestimmungen</h3>
+      <p>Änderungen und Ergänzungen dieser AGB bedürfen mindestens der Textform, sofern nicht gesetzlich eine strengere Form vorgeschrieben ist. Sollten einzelne Bestimmungen dieser AGB ganz oder teilweise unwirksam oder undurchführbar sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt. Anstelle der unwirksamen oder undurchführbaren Bestimmung gilt diejenige wirksame Regelung als vereinbart, die dem wirtschaftlichen Zweck der ursprünglichen Bestimmung am nächsten kommt, soweit gesetzlich zulässig. Es gilt ausschließlich deutsches Recht unter Ausschluss des UN-Kaufrechts, soweit dessen Anwendung eröffnet sein könnte. Gerichtsstand ist – soweit gesetzlich zulässig – der Sitz der Agentur.</p>
+
+      <h2 class="doc-title" id="datenschutz">Datenschutzhinweis für Arbeitgeber (B2B)</h2>
+
+      <h4>1. Verantwortlicher</h4>
+      <div class="legal-card">
+        <p style="margin-bottom:2px"><strong>glarc.de – Hans Thorsten Tuchel</strong></p>
+        <p style="margin-bottom:2px">Im Weingarten 18, 56818 Klotten, Deutschland</p>
+        <p style="margin-bottom:2px">E-Mail: <a href="mailto:hans.tuchel@glarc.de" style="color:var(--g-blue-mid);font-weight:600">hans.tuchel@glarc.de</a></p>
+        <p style="margin-bottom:2px">Tel.: <a href="tel:+4917165705580" style="color:var(--g-blue-mid);font-weight:600">+49 171 6570 558</a></p>
+        <p style="margin-bottom:2px"><a href="https://www.glarc.de" target="_blank" rel="noopener" style="color:var(--g-blue-mid);font-weight:600">www.glarc.de</a></p>
+        <p style="margin-bottom:0">Datenschutzbeauftragter: Christian Schimanke</p>
+      </div>
+
+      <h4>2. Zwecke und Umfang der Verarbeitung</h4>
+      <p>Wir verarbeiten personenbezogene Daten von Ansprechpartnern bei Arbeitgebern (Kunden/Interessenten) zur Anbahnung, Durchführung und Abrechnung von Vermittlungs- und Beratungsverträgen sowie zur laufenden Kommunikation, z. B. für Terminabstimmungen, Profil- und Kandidatenvorschläge, Vertragsunterlagen und Rechnungen.</p>
+
+      <h4>3. Kategorien personenbezogener Daten</h4>
+      <p>Wir verarbeiten insbesondere folgende Daten von Ansprechpartnern bei Arbeitgebern:</p>
+      <ul>
+        <li>Stammdaten und Identifikationsdaten (Name, Funktion/Rolle, Unternehmen)</li>
+        <li>Kontaktdaten (geschäftliche E-Mail-Adresse, geschäftliche Telefonnummer, Geschäftsadresse)</li>
+        <li>Kommunikations- und Vertragsdaten (Anfragen, Angebote, Verträge, Notizen)</li>
+        <li>Abrechnungs- und Zahlungsdaten, soweit personenbezogen</li>
+        <li>IT-Protokolle und Metadaten aus E-Mail-, Telefonie- und Kollaborationstools, soweit erforderlich</li>
+      </ul>
+
+      <h4>4. Rechtsgrundlagen</h4>
+      <p>Die Verarbeitung erfolgt auf Grundlage von:</p>
+      <ul>
+        <li>Art. 6 Abs. 1 lit. b DSGVO (Vertrag oder vertragsähnliches Verhältnis)</li>
+        <li>Art. 6 Abs. 1 lit. f DSGVO (berechtigte Interessen)</li>
+        <li>Art. 6 Abs. 1 lit. c DSGVO (rechtliche Verpflichtung)</li>
+      </ul>
+
+      <h4>5. Empfänger / Kategorien von Empfängern</h4>
+      <p>Empfänger der Daten können interne Stellen (z. B. Vertrieb, Projekt, Kandidatenmanagement), potenzielle Vertragspartner im Rahmen konkreter Projekte sowie externe Dienstleister (z. B. IT, Cloud, Hosting, Kommunikationsdienste, Buchhaltung, Steuerberatung) sein, jeweils auf geeigneter datenschutzrechtlicher Grundlage.</p>
+
+      <h4>6. Rollenverteilung mit Arbeitgebern</h4>
+      <p>Arbeitgeber und glarc.de handeln grundsätzlich als eigenständige Verantwortliche. Erfolgt eine Verarbeitung ausnahmsweise im Auftrag eines Arbeitgebers, schließen wir einen Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO.</p>
+
+      <h4>7. Datenübermittlungen in Drittländer</h4>
+      <p>Soweit erforderlich, können Daten in Länder außerhalb der EU bzw. des EWR übermittelt werden. In diesem Fall werden geeignete Garantien gemäß Art. 46 DSGVO eingesetzt, insbesondere EU-Standardvertragsklauseln, soweit kein Angemessenheitsbeschluss besteht.</p>
+
+      <h4>8. Einsatz von Künstlicher Intelligenz (KI)</h4>
+      <p>Zur Unterstützung der B2B-Kommunikation und Projektabwicklung können KI-gestützte Werkzeuge eingesetzt werden, z. B. für Entwürfe, Übersetzungen, Strukturierung oder Qualitätssicherung. Es finden keine ausschließlich automatisierten Entscheidungen mit Rechtswirkung oder ähnlich erheblicher Beeinträchtigung statt. KI-Anbieter werden – soweit sie Zugriff auf personenbezogene Daten erhalten – datenschutzrechtlich angemessen eingebunden. Eine Nutzung personenbezogener Daten zum Training allgemeiner KI-Modelle erfolgt nicht, soweit nicht zuvor eine ausdrückliche gesonderte Rechtsgrundlage besteht.</p>
+
+      <h4>9. Datenquellen</h4>
+      <p>Die Daten stammen insbesondere aus:</p>
+      <ul>
+        <li>direkter Kommunikation mit Ihnen (E-Mail, Telefon, Meetings)</li>
+        <li>öffentlichen Quellen (z. B. Unternehmenswebseiten, Handels- und Berufsregister, Berufsnetzwerke)</li>
+        <li>gemeinsam genutzten Kollaborationsplattformen (z. B. SharePoint oder Projekträume)</li>
+      </ul>
+
+      <h4>10. Speicherdauer</h4>
+      <p>Wir verarbeiten Daten für die Dauer der Anbahnung und Durchführung der Geschäftsbeziehung. Anschließend gelten die gesetzlichen Aufbewahrungsfristen, regelmäßig 6 bis 10 Jahre nach HGB und AO. Nicht aufbewahrungspflichtige Daten löschen oder anonymisieren wir, sobald der Zweck der Verarbeitung entfällt.</p>
+
+      <h4>11. Ihre Rechte</h4>
+      <p>Als betroffene Person haben Sie das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit sowie Widerspruch nach Maßgabe der Art. 15 bis 21 DSGVO. Zudem haben Sie das Recht, sich bei einer Datenschutzaufsichtsbehörde zu beschweren.</p>
+
+      <h4>12. Pflicht zur Bereitstellung / Erforderlichkeit</h4>
+      <p>Die Bereitstellung von Kontaktdaten ist für die Durchführung der Geschäftsbeziehung erforderlich. Ohne diese Daten ist eine zielgerichtete Kommunikation und Vertragserfüllung nicht möglich.</p>
+
+      <h4>13. Automatisierte Entscheidungen / Profiling</h4>
+      <p>Es findet keine ausschließlich automatisierte Entscheidungsfindung mit Rechtswirkung oder ähnlich erheblicher Beeinträchtigung statt. Ein technisches Profiling, etwa zur Systemsicherheit oder Missbrauchsprävention, kann stattfinden.</p>
+
+      <h4>14. Kontakt</h4>
+      <p>Fragen zu diesem Datenschutzhinweis oder zur Datenverarbeitung richten Sie bitte an die oben genannten Kontaktdaten oder an den Datenschutzbeauftragten.</p>
+
+      <p class="legal-source">Quelle der Angaben: <a href="https://www.glarc.de/agb" target="_blank" rel="noopener">www.glarc.de/agb</a> · Siehe auch das <a href="impressum.html">Impressum</a>.</p>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">glarc<span>.de</span></div>
+        <p class="footer-desc">Globale Arbeitskräftevermittlung. Ihr Partner für philippinische Fachkräfte, Arbeitskräfte und Auszubildende. Bindung durch nachhaltige, erfolgreiche und menschliche Arbeitsverhältnisse.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="fuer-arbeitgeber.html">Für Arbeitgeber</a>
+        <a href="service.html">Service</a>
+        <a href="fuer-kandidaten.html">Für Kandidaten</a>
+        <a href="ueber-uns.html">Über uns</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <a href="tel:+491701507650">+49 170 1507650</a>
+        <a href="mailto:heike.eggers@glarc.de">heike.eggers@glarc.de</a>
+        <a href="https://www.glarc.de">www.glarc.de</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="agb.html#datenschutz">Datenschutz</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 glarc.de – Globale Arbeitskräftevermittlung</span>
+      <span class="footer-contact">Heike Eggers · <a href="tel:+491701507650">+49 170 1507650</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function openSearch(){
+  document.getElementById('searchOverlay').classList.add('open');
+  document.getElementById('searchInput').focus();
+}
+function closeSearch(){
+  document.getElementById('searchOverlay').classList.remove('open');
+}
+function setSearch(v){
+  document.getElementById('searchInput').value = v;
+}
+function doSearch(){
+  var q = document.getElementById('searchInput').value;
+  if(q){ alert('Suche nach: ' + q); }
+  closeSearch();
+}
+document.getElementById('searchOverlay').addEventListener('click', function(e){
+  if(e.target === this){ closeSearch(); }
+});
+</script>
+</body>
+</html>
