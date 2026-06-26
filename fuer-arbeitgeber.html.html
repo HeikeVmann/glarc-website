@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Für Arbeitgeber – glarc.de</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g-red:#C0392B;--g-red-light:#FBEAEA;--g-red-dark:#922B21;
+  --g-blue:#0C3B6E;--g-blue-mid:#185FA5;--g-blue-light:#E6F1FB;
+  --g-gold:#DCA94E;--g-gold-dark:#B8960C;--g-gold-light:#FAF3DC;
+  --gray-50:#F8F8F7;--gray-100:#EBEBEA;--gray-200:#D4D4D2;
+  --gray-400:#888780;--gray-600:#5F5E5A;--gray-800:#2C2C2A;
+}
+body{font-family:'Georgia',serif;color:var(--gray-800);background:#fff;font-size:16px;line-height:1.7}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+
+/* FAB */
+.call-fab{position:fixed;bottom:28px;right:28px;z-index:9999;width:58px;height:58px;border-radius:50%;background:var(--g-red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 20px rgba(192,57,43,.45);transition:transform .2s,background .2s;border:none;cursor:pointer;}
+.call-fab:hover{background:var(--g-red-dark);transform:scale(1.1)}
+.call-fab svg{width:26px;height:26px;fill:#fff}
+
+/* WHATSAPP FAB */
+.wa-fab{position:fixed;bottom:96px;right:28px;z-index:9999;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.45);transition:transform .2s,background .2s;}
+.wa-fab:hover{background:#1ebe5d;transform:scale(1.1)}
+.wa-fab svg{width:30px;height:30px;fill:#fff}
+
+/* SEARCH */
+.search-overlay{display:none;position:fixed;inset:0;background:rgba(12,59,110,.92);z-index:8888;align-items:flex-start;justify-content:center;padding-top:120px;}
+.search-overlay.open{display:flex}
+.search-box-big{width:min(680px,92vw);position:relative}
+.search-box-big input{width:100%;padding:18px 56px 18px 20px;font-size:20px;border:none;border-radius:10px;outline:none;font-family:inherit;background:#fff;color:var(--gray-800);}
+.search-box-big button{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:var(--g-red);border:none;border-radius:7px;padding:8px 12px;cursor:pointer;color:#fff;font-size:16px;}
+.search-close{position:absolute;top:28px;right:32px;color:#fff;font-size:28px;background:none;border:none;cursor:pointer;opacity:.7;}
+.search-close:hover{opacity:1}
+.search-tags{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.search-tags span{background:rgba(255,255,255,.15);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;font-family:sans-serif;transition:background .2s;}
+.search-tags span:hover{background:rgba(255,255,255,.3)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid var(--gray-100);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:42px;height:42px;border-radius:8px;background:var(--g-blue);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.logo-mark svg{width:28px;height:28px}
+.logo-text{font-family:sans-serif;font-size:17px;font-weight:700;color:var(--g-blue);letter-spacing:-0.3px}
+.logo-text span{color:var(--g-red)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-family:sans-serif;font-size:13px;color:var(--gray-600);letter-spacing:.3px;text-transform:uppercase;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--g-blue)}
+.nav-links a.active{color:var(--g-blue);font-weight:700}
+.btn-search-nav{background:none;border:2px solid var(--g-red);border-radius:7px;padding:9px 18px 9px 14px;display:flex;align-items:center;gap:6px;font-family:sans-serif;font-size:13px;font-weight:600;color:var(--g-red);cursor:pointer;transition:background .2s,color .2s;white-space:nowrap;}
+.btn-search-nav:hover{background:var(--g-red);color:#fff}
+.btn-search-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;flex-shrink:0}
+.btn-cta-nav{background:var(--g-red);color:#fff;font-family:sans-serif;font-size:13px;font-weight:600;padding:9px 18px;border-radius:7px;border:none;cursor:pointer;transition:background .2s;white-space:nowrap;}
+.btn-cta-nav:hover{background:var(--g-red-dark)}
+
+/* LAYOUT */
+.container{max-width:1180px;margin:0 auto;padding:0 5%}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:36px;padding-bottom:14px;border-bottom:1px solid var(--gray-100)}
+.section-tag{font-family:sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--g-red);font-weight:800}
+.section-title{font-size:22px;font-weight:700;color:var(--g-blue);letter-spacing:-.3px}
+.section-line{flex:1;height:1px;background:var(--gray-100)}
+
+/* TICKER */
+.ticker-bar{background:var(--g-blue);padding:10px 0;overflow:hidden;font-family:sans-serif;font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.5px;}
+.ticker-inner{display:flex;gap:48px;animation:ticker 30s linear infinite;width:max-content}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{white-space:nowrap}
+.ticker-item strong{color:#fff}
+
+/* SUBHERO */
+.subhero{background:var(--g-blue);padding:68px 5% 56px}
+.subhero-eyebrow{font-family:sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px}
+.subhero h1{font-size:clamp(26px,3.2vw,42px);font-weight:700;line-height:1.2;margin-bottom:16px;max-width:700px;color:#fff;letter-spacing:-.4px}
+.subhero-lead{font-family:sans-serif;font-size:16px;color:rgba(255,255,255,.82);max-width:620px;line-height:1.7;margin-bottom:10px}
+.subhero-tagline{font-family:sans-serif;font-size:13px;color:var(--g-gold);letter-spacing:.5px;margin-bottom:28px}
+.subhero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-red{background:var(--g-red);color:#fff;font-family:sans-serif;font-size:14px;font-weight:600;padding:12px 22px;border-radius:7px;border:none;cursor:pointer;transition:background .2s}
+.btn-red:hover{background:var(--g-red-dark)}
+.btn-outline-white{background:transparent;color:#fff;font-family:sans-serif;font-size:14px;font-weight:500;padding:12px 22px;border-radius:7px;border:1.5px solid rgba(255,255,255,.35);cursor:pointer;transition:border-color .2s}
+.btn-outline-white:hover{border-color:#fff}
+
+/* STATS STRIP */
+.stats-strip{background:var(--g-gold);padding:22px 5%}
+.stats-inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:18px}
+.stat-item{text-align:center}
+.stat-num{display:block;font-family:sans-serif;font-size:26px;font-weight:800;color:var(--g-blue);line-height:1.1}
+.stat-label{font-family:sans-serif;font-size:11.5px;letter-spacing:.5px;color:var(--g-blue);opacity:.8;text-transform:uppercase}
+
+/* VORTEILE */
+.vorteile-section{padding:72px 0;background:#fff}
+.vorteile-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+.vorteile-text h2{font-size:clamp(20px,2.5vw,28px);font-weight:700;color:var(--g-blue);margin-bottom:18px;line-height:1.25}
+.vorteile-text p{font-family:sans-serif;font-size:14.5px;color:var(--gray-600);line-height:1.8;margin-bottom:14px}
+.vorteile-text .highlight-quote{border-left:3px solid var(--g-gold);padding:14px 18px;background:var(--g-gold-light);border-radius:0 8px 8px 0;font-family:sans-serif;font-size:14px;color:var(--g-blue);font-style:italic;margin:22px 0;line-height:1.65}
+.vorteile-list{display:flex;flex-direction:column;gap:12px}
+.vorteil-item{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--gray-50);border-radius:10px;border:1px solid var(--gray-100)}
+.vorteil-icon{font-size:22px;flex-shrink:0;width:40px;height:40px;background:#fff;border:1px solid var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.vorteil-item h4{font-family:sans-serif;font-size:13.5px;font-weight:700;color:var(--g-blue);margin-bottom:3px}
+.vorteil-item p{font-family:sans-serif;font-size:12.5px;color:var(--gray-600);line-height:1.55}
+
+/* PROZESS */
+.prozess-section{padding:72px 0;background:var(--gray-50)}
+.prozess-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;position:relative}
+.prozess-step{background:#fff;border:1px solid var(--gray-100);border-radius:10px;padding:24px 18px;text-align:center;position:relative}
+.prozess-step::after{content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--g-gold);font-weight:700;z-index:1}
+.prozess-step:last-child::after{display:none}
+.step-num{font-family:sans-serif;font-size:11px;font-weight:900;letter-spacing:1.5px;color:var(--g-red);text-transform:uppercase;margin-bottom:10px;display:block}
+.step-icon{font-size:32px;margin-bottom:12px;display:block}
+.prozess-step h4{font-family:sans-serif;font-size:13px;font-weight:700;color:var(--g-blue);margin-bottom:6px}
+.prozess-step p{font-family:sans-serif;font-size:11.5px;color:var(--gray-600);line-height:1.55}
+
+/* ARGUMENTE */
+.argumente-section{padding:72px 0;background:#fff}
+.argumente-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.argument-card{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;padding:28px;transition:box-shadow .2s,border-color .2s}
+.argument-card:hover{box-shadow:0 6px 24px rgba(12,59,110,.09);border-color:var(--g-blue)}
+.arg-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.arg-num{font-family:sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--g-red);text-transform:uppercase}
+.arg-icon{font-size:28px}
+.argument-card h3{font-family:sans-serif;font-size:15px;font-weight:700;color:var(--g-blue);margin-bottom:10px}
+.argument-card p{font-family:sans-serif;font-size:13px;color:var(--gray-600);line-height:1.65}
+.argument-card .arg-quote{border-left:2px solid var(--g-gold);padding:8px 12px;background:var(--g-gold-light);border-radius:0 6px 6px 0;font-family:sans-serif;font-size:12px;color:var(--g-blue);font-style:italic;margin-top:12px}
+.arg-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.arg-tag{background:var(--g-blue-light);color:var(--g-blue);font-family:sans-serif;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px}
+
+/* TABELLE */
+.table-section{padding:72px 0;background:var(--gray-50)}
+.nutzen-table{width:100%;border-collapse:collapse;font-family:sans-serif}
+.nutzen-table th{background:var(--g-blue);color:#fff;padding:14px 20px;font-size:13px;font-weight:700;letter-spacing:.5px;text-align:left}
+.nutzen-table th:first-child{border-radius:8px 0 0 0}
+.nutzen-table th:last-child{border-radius:0 8px 0 0}
+.nutzen-table td{padding:14px 20px;font-size:13.5px;border-bottom:1px solid var(--gray-100);vertical-align:middle}
+.nutzen-table tr:last-child td{border-bottom:none}
+.nutzen-table tr:nth-child(even) td{background:var(--gray-50)}
+.nutzen-table tr:nth-child(odd) td{background:#fff}
+.nutzen-table td:first-child{font-weight:700;color:var(--g-blue)}
+.nutzen-table td .check{color:var(--g-blue);font-size:16px;margin-right:6px}
+
+/* TESTIMONIALS */
+.testimonial-section{padding:72px 0;background:#fff}
+.quote-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.quote-block{background:var(--gray-50);border-left:4px solid var(--g-gold);border-radius:8px;padding:26px;font-family:Georgia,serif;font-style:italic;color:var(--gray-800);font-size:14.5px;line-height:1.7}
+.quote-block cite{display:block;margin-top:16px;font-family:sans-serif;font-style:normal;font-size:12px;color:var(--gray-600);font-weight:600}
+
+/* CTA BANNER */
+.cta-banner{background:var(--g-red);padding:52px 0}
+.cta-banner-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta-banner h2{color:#fff;font-size:23px;margin-bottom:6px;font-weight:700}
+.cta-banner p{color:rgba(255,255,255,.8);font-family:sans-serif;font-size:14px}
+.btn-white-lg{background:#fff;color:var(--g-red);font-family:sans-serif;font-weight:700;font-size:15px;padding:14px 28px;border-radius:8px;white-space:nowrap;transition:background .2s;display:inline-block;border:none;cursor:pointer}
+.btn-white-lg:hover{background:var(--g-red-light)}
+
+/* FOOTER */
+footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
+.footer-inner{max-width:1180px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1)}
+.footer-logo{font-family:sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:12px}
+.footer-logo span{color:var(--g-gold)}
+.footer-desc{font-family:sans-serif;font-size:13px;line-height:1.65}
+.footer-col h4{font-family:sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}
+.footer-col a{display:block;font-family:sans-serif;font-size:13px;margin-bottom:8px;color:rgba(255,255,255,.65);transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-family:sans-serif;font-size:12px;flex-wrap:wrap;gap:10px}
+.footer-contact a{color:var(--g-gold);font-weight:600}
+
+/* KONTAKT & ANFRAGE FORMULAR */
+.request-section{padding:72px 0;background:var(--g-blue-light)}
+.request-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.request-info h2{font-size:24px;font-weight:700;color:var(--g-blue);margin-bottom:12px}
+.request-info p{font-family:sans-serif;font-size:14px;color:var(--gray-600);line-height:1.65;margin-bottom:20px}
+.contact-chip{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.contact-chip-icon{width:36px;height:36px;border-radius:8px;background:#fff;border:1px solid var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.contact-chip-text{font-family:sans-serif}
+.contact-chip-text small{display:block;font-size:11px;color:var(--gray-400);letter-spacing:.3px;text-transform:uppercase}
+.contact-chip-text strong{font-size:14px;color:var(--gray-800);font-weight:500}
+.req-form{background:#fff;border-radius:12px;border:1px solid var(--gray-100);padding:28px}
+.form-label{font-family:sans-serif;font-size:12px;font-weight:600;color:var(--gray-600);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:block;margin-top:16px}
+.form-label:first-child{margin-top:0}
+input[type=text],input[type=email],input[type=tel],select,textarea{width:100%;padding:11px 14px;border:1px solid var(--gray-200);border-radius:7px;font-size:14px;color:var(--gray-800);background:#fff;outline:none;font-family:sans-serif;transition:border-color .2s;}
+input:focus,select:focus,textarea:focus{border-color:var(--g-blue-mid);box-shadow:0 0 0 3px rgba(24,95,165,.1)}
+textarea{resize:vertical;min-height:90px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.upload-zone{border:2px dashed var(--gray-200);border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;font-family:sans-serif;font-size:13px;color:var(--gray-400);margin-top:16px;background:var(--gray-50);}
+.upload-zone:hover{border-color:var(--g-blue-mid);background:var(--g-blue-light);color:var(--g-blue)}
+.upload-zone input{display:none}
+.upload-zone-icon{font-size:28px;margin-bottom:8px;display:block}
+.upload-zone small{display:block;font-size:11px;margin-top:4px;opacity:.7}
+.link-row{display:flex;gap:8px;margin-top:16px}
+.link-row input{flex:1}
+.link-row button{background:var(--g-blue);color:#fff;border:none;border-radius:7px;padding:11px 16px;cursor:pointer;font-size:13px;font-family:sans-serif;white-space:nowrap;transition:background .2s}
+.link-row button:hover{background:var(--g-blue-mid)}
+.hubspot-note{font-family:sans-serif;font-size:11px;color:var(--gray-400);display:flex;align-items:center;gap:6px;margin-top:10px}
+.hubspot-note::before{content:'↻';font-size:14px;color:var(--g-blue-mid)}
+.btn-submit{width:100%;background:var(--g-red);color:#fff;font-family:sans-serif;font-size:15px;font-weight:700;padding:14px;border-radius:8px;border:none;cursor:pointer;margin-top:18px;transition:background .2s;letter-spacing:.3px}
+.btn-submit:hover{background:var(--g-red-dark)}
+.success-panel{display:none;background:#fff;border-radius:12px;border:1px solid #C0DD97;padding:32px;text-align:center}
+.success-panel h3{font-family:sans-serif;font-size:18px;color:#27500A;margin-bottom:8px}
+.success-panel p{font-family:sans-serif;font-size:13px;color:var(--gray-600)}
+
+@media(max-width:900px){
+  .vorteile-grid{grid-template-columns:1fr}
+  .prozess-steps{grid-template-columns:1fr 1fr}
+  .argumente-grid{grid-template-columns:1fr 1fr}
+  .quote-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .footer-top{grid-template-columns:1fr}
+  .cta-banner-inner{flex-direction:column;align-items:flex-start}
+  .stats-inner{justify-content:center;gap:28px}
+  .prozess-step::after{display:none}
+  .request-inner{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .argumente-grid,.prozess-steps{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<a class="wa-fab" href="https://wa.me/491716570558" target="_blank" title="WhatsApp" aria-label="WhatsApp schreiben">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<a class="call-fab" href="tel:+491716570558" title="Jetzt anrufen" aria-label="Sofort anrufen">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1v3.5a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1H7.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
+</a>
+
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" onclick="closeSearch()">✕</button>
+  <div class="search-box-big">
+    <input type="text" id="searchInput" placeholder="z. B. Fachkraft, Arbeitskraft, Auszubildende …">
+    <button onclick="doSearch()">→</button>
+    <div class="search-tags">
+      <span onclick="setSearch('Arbeitskräfte')">Arbeitskräfte</span>
+      <span onclick="setSearch('IT-Fachkräfte')">IT-Fachkräfte</span>
+      <span onclick="setSearch('Köche &amp; Gastronomie')">Köche &amp; Gastronomie</span>
+      <span onclick="setSearch('Auszubildende')">Auszubildende</span>
+      <span onclick="setSearch('Handwerk')">Handwerk</span>
+      <span onclick="setSearch('Logistik')">Logistik</span>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-links">
+    <button class="btn-cta-nav" onclick="location.href='index.html#anfrage'">START</button>
+    <button class="btn-search-nav" onclick="openSearch()">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+      Suchen
+    </button>
+    <a href="fuer-arbeitgeber.html" class="active">Für Arbeitgeber</a>
+    <a href="service.html">Service</a>
+    <a href="fuer-kandidaten.html">Für Kandidaten</a>
+    <a href="ueber-uns.html">Über uns</a>
+  </div>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-mark">
+      <svg viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="10" stroke="#D4A017" stroke-width="2"></circle>
+        <path d="M8 14 Q14 7 20 14 Q14 21 8 14Z" fill="#D4A017"></path>
+        <circle cx="14" cy="14" r="3" fill="#fff"></circle>
+      </svg>
+    </div>
+    <span class="logo-text">glarc<span>.de</span></span>
+  </a>
+</nav>
+
+<!-- SUBHERO -->
+<div class="subhero">
+  <div class="container">
+    <div class="subhero-eyebrow">Für Arbeitgeber</div>
+    <h1>Fach- und Kräftemangel? Wir liefern Lösungen. Für Lösungswillige.</h1>
+    <p class="subhero-lead">GLARC ist Ihr zuverlässiger Partner für die Rekrutierung qualifizierter Arbeitskräfte, Auszubildender, Au-pairs und Fachkräfte aus den Philippinen – branchenübergreifend, passgenau und rechtssicher.</p>
+    <p class="subhero-tagline">Komplettservice · Rechtssicher · Persönlich · Nachhaltig</p>
+    <div class="subhero-btns">
+      <button class="btn-red" onclick="location.href='index.html#anfrage'">Jetzt Fachkräfte anfragen</button>
+      <button class="btn-outline-white" onclick="location.href='service.html'">Unseren Service entdecken</button>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-inner">
+    <span class="ticker-item"><strong>Pflege</strong> · Altenpflege, Krankenpflege</span>
+    <span class="ticker-item"><strong>Gastronomie</strong> · Köche, Service, Hotelfach</span>
+    <span class="ticker-item"><strong>Handwerk</strong> · Elektro, Sanitär, Bau</span>
+    <span class="ticker-item"><strong>IT &amp; Tech</strong> · Entwickler, Netzwerk</span>
+    <span class="ticker-item"><strong>Logistik</strong> · Fahrer, Lager, Spedition</span>
+    <span class="ticker-item"><strong>Optimierung</strong> · Versicherung Fahrzeugflotte und Gewerbe</span>
+    <span class="ticker-item"><strong>Ausbildung</strong> · Auszubildende in allen Berufen</span>
+    <span class="ticker-item"><strong>Pflege</strong> · Altenpflege, Krankenpflege</span>
+    <span class="ticker-item"><strong>Gastronomie</strong> · Köche, Service, Hotelfach</span>
+    <span class="ticker-item"><strong>Handwerk</strong> · Elektro, Sanitär, Bau</span>
+    <span class="ticker-item"><strong>IT &amp; Tech</strong> · Entwickler, Netzwerk</span>
+    <span class="ticker-item"><strong>Logistik</strong> · Fahrer, Lager, Spedition</span>
+    <span class="ticker-item"><strong>Optimierung</strong> · Versicherung Fahrzeugflotte und Gewerbe</span>
+    <span class="ticker-item"><strong>Ausbildung</strong> · Auszubildende in allen Berufen</span>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num">20+ Jahre</span>
+      <span class="stat-label">Philippinen-Erfahrung</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">3.000+</span>
+      <span class="stat-label">Erfolgreiche Vermittlungen</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">A1–B2</span>
+      <span class="stat-label">Anerkannte Sprachkurse</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">3+</span>
+      <span class="stat-label">Standorte in Deutschland</span>
+    </div>
+  </div>
+</div>
+
+<!-- IHRE VORTEILE -->
+<section class="vorteile-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Ihre Vorteile</span>
+      <span class="section-title">Was GLARC für Sie übernimmt</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="vorteile-grid">
+      <div class="vorteile-text">
+        <h2>Komplettservice aus einer Hand</h2>
+        <p>Von der Bedarfsanalyse bis zur Ankunft der Arbeitskräfte – und darüber hinaus. Wir nehmen Ihnen den gesamten organisatorischen Aufwand ab, sodass Sie sich auf Ihr Tagesgeschäft konzentrieren können.</p>
+        <div class="highlight-quote">„Unser Erfolg basiert auf tiefem Vertrauen, langjähriger Erfahrung und einem exzellenten Netzwerk – gewachsen durch den über 20-jährigen Aufenthalt unseres Geschäftsführers auf den Philippinen und nach wie vor aktiv."</div>
+        <p>Wir vermitteln auch philippinische Arbeitskräfte, die bereits im Ausland oder in Deutschland sind. Bei Bedarf auch Arbeitskräfte aus anderen Ländern. Effizienter Ablauf und persönliche Betreuung – auch nach der Ankunft in Deutschland.</p>
+      </div>
+      <div class="vorteile-list">
+        <div class="vorteil-item">
+          <div class="vorteil-icon">🎯</div>
+          <div>
+            <h4>Zugang zu motivierten Bewerbern</h4>
+            <p>Gut ausgebildete, motivierte Kandidaten aus unserem gewachsenen Netzwerk auf den Philippinen.</p>
+          </div>
+        </div>
+        <div class="vorteil-item">
+          <div class="vorteil-icon">📚</div>
+          <div>
+            <h4>Eigene Sprachschule A1–B2</h4>
+            <p>Präsenz- und Onlinekurse für optimale Vorbereitung – auch berufsspezifische Sprachausbildung.</p>
+          </div>
+        </div>
+        <div class="vorteil-item">
+          <div class="vorteil-icon">🏛️</div>
+          <div>
+            <h4>Registrierte Partneragentur Manila</h4>
+            <p>Sichere und legale Vermittlung über unsere behördlich zugelassene Partneragentur in Manila.</p>
+          </div>
+        </div>
+        <div class="vorteil-item">
+          <div class="vorteil-icon">📋</div>
+          <div>
+            <h4>Alle Formalitäten aus einer Hand</h4>
+            <p>Visumsanträge, Dokumente, Anerkennungen – wir begleiten jeden Schritt rechtssicher.</p>
+          </div>
+        </div>
+        <div class="vorteil-item">
+          <div class="vorteil-icon">🤝</div>
+          <div>
+            <h4>Persönliche Betreuung vor &amp; nach Ankunft</h4>
+            <p>Unsere Ansprechpartner begleiten Sie und die Arbeitskräfte auch nach der Einreise in Deutschland.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALLEINSTELLUNGSMERKMAL BANNER -->
+    <div style="background:var(--g-blue);border-radius:10px;padding:36px 48px;margin-top:32px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap">
+      <div>
+        <div style="font-family:sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--g-gold);margin-bottom:10px">⭐⭐⭐⭐⭐ Unser Alleinstellungsmerkmal</div>
+        <div style="font-family:sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:10px">Unsere Vermittlungs-Garantie</div>
+        <p style="font-family:sans-serif;font-size:14px;color:rgba(255,255,255,.82);line-height:1.65;max-width:780px">Mit unserer Vermittlungs-Garantie unterscheiden wir uns nicht nur von anderen Anbietern, sondern unterstreichen unser Vertrauen in die Qualität unserer Arbeit sowie unseren Anspruch, Ihnen eine nachhaltige und stabile Lösung zu bieten.</p>
+      </div>
+    </div>
+
+    <!-- WAS UNS UNTERSCHEIDET -->
+    <div style="margin-top:52px;background:var(--g-gold-light);border:1px solid var(--g-gold);border-radius:12px;padding:36px 40px;display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:start">
+      <div style="font-size:48px;line-height:1">🌏</div>
+      <div>
+        <div style="font-family:sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--g-red);margin-bottom:8px">Was uns unterscheidet</div>
+        <h3 style="font-family:sans-serif;font-size:20px;font-weight:700;color:var(--g-blue);margin-bottom:14px;line-height:1.3">Unser Netzwerk basiert auf tiefem Vertrauen und langjährigen, persönlichen Kontakten.</h3>
+        <p style="font-family:sans-serif;font-size:14px;color:var(--gray-600);line-height:1.75;margin-bottom:12px">Unser geschäftsführender Gesellschafter war selbst über 20 Jahre auf den Philippinen ansässig und verfügt dort über exzellente Zugänge zu hochqualifizierten Fachkräften, Arbeitskräften, Agenturen sowie den lokalen Behörden – die er weiterhin durch persönlichen Austausch vor Ort pflegt.</p>
+        <p style="font-family:sans-serif;font-size:14px;font-weight:700;color:var(--g-blue);line-height:1.65">Diese tiefe kulturelle und operative Verwurzelung ermöglicht uns eine Vermittlungsqualität, die weit über den Standard hinausgeht.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLISTE FRAGEN -->
+<section style="padding:72px 0;background:var(--gray-50)">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Denkanstöße</span>
+      <span class="section-title">Warum eine Investition in philippinische Arbeitskräfte dauerhaft förderlich ist</span>
+      <div class="section-line"></div>
+    </div>
+    <p style="font-family:sans-serif;font-size:15px;color:var(--gray-600);line-height:1.8;margin-bottom:36px;max-width:780px">Stellen Sie sich diese Fragen – und überlegen Sie, was sich in Ihrem Unternehmen verändern würde:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="background:#fff;border:1px solid var(--gray-100);border-left:4px solid var(--g-blue);border-radius:0 10px 10px 0;padding:20px 22px;display:flex;align-items:flex-start;gap:14px">
+        <span style="flex-shrink:0;display:inline-flex;align-items:center"><svg width="24" height="24" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="16" cy="16" r="14" fill="#8DB86A" stroke="#6A9A48" stroke-width="1.5"/>
+  <polygon points="10,3 8.5,8 11.5,8" fill="#185FA5"/>
+  <polygon points="16,1 14.5,6 17.5,6" fill="#185FA5"/>
+  <polygon points="22,3 20.5,8 23.5,8" fill="#185FA5"/>
+  <text x="7.5" y="18" font-family="sans-serif" font-size="9" font-weight="900" fill="#1a1a1a">€</text>
+  <text x="18" y="18" font-family="sans-serif" font-size="9" font-weight="900" fill="#1a1a1a">€</text>
+  <path d="M10 24 Q16 21 22 24" stroke="#1a1a1a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+</svg></span>
+        <p style="font-family:sans-serif;font-size:13.5px;color:var(--gray-800);line-height:1.65">Wie viel <span style="color:var(--g-red);font-weight:700">Umsatz</span> und welche Projekte liegen aktuell <span style="color:var(--g-red);font-weight:700">auf Eis</span>, weil Kapazitäten fehlen bzw. Ihr Team ausgelastet ist?</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--gray-100);border-left:4px solid var(--g-blue);border-radius:0 10px 10px 0;padding:20px 22px;display:flex;align-items:flex-start;gap:14px">
+        <span style="font-size:22px;flex-shrink:0">🤠</span>
+        <p style="font-family:sans-serif;font-size:13.5px;color:var(--gray-800);line-height:1.65">Wie wichtig ist es für Sie, <span style="color:var(--g-red);font-weight:700">unabhängig</span> von einem angespannten lokalen Arbeitsmarkt zu sein?</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--gray-100);border-left:4px solid var(--g-gold);border-radius:0 10px 10px 0;padding:20px 22px;display:flex;align-items:flex-start;gap:14px">
+        <span style="font-size:22px;flex-shrink:0">⚓</span>
+        <p style="font-family:sans-serif;font-size:13.5px;color:var(--gray-800);line-height:1.65">Was würde es für Sie bedeuten, Mitarbeiter zu haben, die <span style="color:var(--g-red);font-weight:700">langfristig loyal</span> bleiben?</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--gray-100);border-left:4px solid var(--g-gold);border-radius:0 10px 10px 0;padding:20px 22px;display:flex;align-items:flex-start;gap:14px">
+        <span style="font-size:22px;flex-shrink:0">📈</span>
+        <p style="font-family:sans-serif;font-size:13.5px;color:var(--gray-800);line-height:1.65">Wie stark wirkt sich eine hohe <span style="color:var(--g-red);font-weight:700">Arbeitsmoral</span> auf Ihre Teamleistung aus?</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--gray-100);border-left:4px solid var(--g-blue);border-radius:0 10px 10px 0;padding:20px 22px;display:flex;align-items:flex-start;gap:14px">
+        <span style="font-size:22px;flex-shrink:0">💪</span>
+        <p style="font-family:sans-serif;font-size:13.5px;color:var(--gray-800);line-height:1.65">Wie wichtig sind Ihnen <span style="color:var(--g-red);font-weight:700">Fleiß</span>, <span style="color:var(--g-red);font-weight:700">Einsatzfreude</span> und <span style="color:var(--g-red);font-weight:700">Kollegialität</span> bei neuen Mitarbeitern?</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--gray-100);border-left:4px solid var(--g-blue);border-radius:0 10px 10px 0;padding:20px 22px;display:flex;align-items:flex-start;gap:14px">
+        <span style="font-size:22px;flex-shrink:0">⏱️</span>
+        <p style="font-family:sans-serif;font-size:13.5px;color:var(--gray-800);line-height:1.65">Was würde es für Sie und Ihre jetzigen Mitarbeiter bedeuten, wenn Aufgaben mit <span style="color:var(--g-red);font-weight:700">weniger</span> <span style="color:var(--g-red);font-weight:700">Ausfallzeiten</span> erledigt würden?</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--gray-100);border-left:4px solid var(--g-gold);border-radius:0 10px 10px 0;padding:20px 22px;display:flex;align-items:flex-start;gap:14px">
+        <span style="font-size:22px;flex-shrink:0">🎯</span>
+        <p style="font-family:sans-serif;font-size:13.5px;color:var(--gray-800);line-height:1.65">Welche Aufgaben binden aktuell Ihre teuersten Mitarbeiter, obwohl sie <span style="color:var(--g-red);font-weight:700">delegierbar</span> wären?</p>
+      </div>
+      <div style="background:#fff;border:1px solid var(--gray-100);border-left:4px solid var(--g-gold);border-radius:0 10px 10px 0;padding:20px 22px;display:flex;align-items:flex-start;gap:14px">
+        <span style="font-size:30px;flex-shrink:0;cursor:pointer" onclick="playElephant()" title="🎺">🐘</span>
+        <p style="font-family:sans-serif;font-size:13.5px;color:var(--gray-800);line-height:1.65">Welche Prozesse könnten <span style="color:var(--g-red);font-weight:700">stabiler</span> laufen, wenn Kapazitäten nicht kurzfristig wegbrechen?</p>
+      </div>
+    </div>
+    <div style="margin-top:32px;background:var(--g-blue);border-radius:10px;padding:22px 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <span style="font-size:32px">🚀</span>
+      <div style="flex:1">
+        <p style="font-family:sans-serif;font-size:15px;font-weight:700;color:#fff;margin-bottom:4px">Wenn Sie auch nur eine dieser Fragen mit „sehr wichtig" beantwortet haben –</p>
+        <p style="font-family:sans-serif;font-size:13.5px;color:rgba(255,255,255,.82)">dann ist GLARC der richtige Partner für Sie. Sprechen Sie uns an – wir beraten Sie gerne persönlich.</p>
+      </div>
+      <a href="index.html#anfrage" style="background:var(--g-red);color:#fff;font-family:sans-serif;font-size:13px;font-weight:700;padding:12px 22px;border-radius:7px;white-space:nowrap">Jetzt beraten lassen</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROZESS -->
+<section class="prozess-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Ablauf</span>
+      <span class="section-title">So läuft die Zusammenarbeit ab</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="prozess-steps">
+      <div class="prozess-step">
+        <span class="step-num">Schritt 01</span>
+        <span class="step-icon">📝</span>
+        <h4>Job Order &amp; Anforderungsprofil</h4>
+        <p>Sie übermitteln uns Ihren konkreten Personalbedarf und die gewünschten Qualifikationen.</p>
+      </div>
+      <div class="prozess-step">
+        <span class="step-num">Schritt 02</span>
+        <span class="step-icon">🔍</span>
+        <h4>Vorauswahl &amp; Interviews</h4>
+        <p>Wir treffen eine sorgfältige Vorauswahl und organisieren Interviews – online oder vor Ort.</p>
+      </div>
+      <div class="prozess-step">
+        <span class="step-num">Schritt 03</span>
+        <span class="step-icon">📚</span>
+        <h4>Sprachtraining &amp; Dokumente</h4>
+        <p>Deutschkurse A1–B2 und vollständige Vorbereitung aller erforderlichen Unterlagen.</p>
+      </div>
+      <div class="prozess-step">
+        <span class="step-num">Schritt 04</span>
+        <span class="step-icon">⚖️</span>
+        <h4>Visum &amp; Behördenverfahren</h4>
+        <p>Wir begleiten die Antragstellung und alle rechtlichen Schritte gemeinsam mit Manila.</p>
+      </div>
+      <div class="prozess-step">
+        <span class="step-num">Schritt 05</span>
+        <span class="step-icon">✈️</span>
+        <h4>Flug &amp; Ankunft</h4>
+        <p>Wir organisieren den Flug und begleiten bei Einreise und Erstintegration vor Ort.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 ARGUMENTE -->
+<section class="argumente-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Warum Philippinen</span>
+      <span class="section-title">7 starke Argumente – in Zahlen &amp; Fakten</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="argumente-grid">
+      <div class="argument-card">
+        <div class="arg-header"><span class="arg-num">01</span><span class="arg-icon">🏋️</span></div>
+        <h3>Hohe Arbeitsmoral &amp; Loyalität</h3>
+        <p>&gt;90 % der philippinischen Arbeitskräfte gelten in weltweiten Einsätzen als zuverlässig, fleißig und engagiert (ILO-Studie 2021).</p>
+        <div class="arg-quote">„Filipinos work not only with their hands – but with their heart."</div>
+      </div>
+      <div class="argument-card">
+        <div class="arg-header"><span class="arg-num">02</span><span class="arg-icon">🗣️</span></div>
+        <h3>Gute Deutsch- &amp; Englischkenntnisse</h3>
+        <p>Sie legen fest, mit welchem Deutschzertifikat (A1–B2) Ihre Arbeitnehmer am ersten Arbeitstag erscheinen. Platz 2 in Asien im EF English Proficiency Index. Englisch ist offizielle Amtssprache – ideal für Einarbeitung und Internationalität.</p>
+      </div>
+      <div class="argument-card">
+        <div class="arg-header"><span class="arg-num">03</span><span class="arg-icon">🌍</span></div>
+        <h3>Kulturelle Nähe &amp; Anpassungsfähigkeit</h3>
+        <p>Respektvoll, teamfähig und schnell integrierbar – kulturell offen und stark familienorientiert. Über 10 Mio. Filipinos arbeiten erfolgreich im Ausland.</p>
+      </div>
+      <div class="argument-card">
+        <div class="arg-header"><span class="arg-num">04</span><span class="arg-icon">🎓</span></div>
+        <h3>Fachliche Qualifikation</h3>
+        <p>Staatlich anerkannte Abschlüsse (TESDA, PRC), medizinische &amp; technische Ausbildungen, Auslandserfahrung in Gesundheitswesen, Handwerk, Gastronomie und mehr. Unsere Kandidaten sind offen für Weiterbildung und entwickeln sich schnell weiter.</p>
+      </div>
+      <div class="argument-card">
+        <div class="arg-header"><span class="arg-num">05</span><span class="arg-icon">💙</span></div>
+        <h3>Freundlichkeit &amp; soziale Kompetenz</h3>
+        <p>Besonders geeignet für Pflegeberufe, Fahrpersonal, Kinderbetreuung, Hotellerie und Handwerk. Filipinos werden oft als „People-oriented &amp; caring" beschrieben.</p>
+        <div class="arg-tags">
+          <span class="arg-tag">Pflege</span>
+          <span class="arg-tag">LKW-Fahrer</span>
+          <span class="arg-tag">Hotellerie</span>
+          <span class="arg-tag">Handwerk</span>
+        </div>
+      </div>
+      <div class="argument-card">
+        <div class="arg-header"><span class="arg-num">06</span><span class="arg-icon">🔒</span></div>
+        <h3>Geringe Fluktuation – Hohe Bindung</h3>
+        <p>GLARC-Kandidaten sind intensiv vorbereitet &amp; motiviert. Das sorgt für langfristige Mitarbeit, geringe Einarbeitungskosten und stabile Arbeitsverhältnisse.</p>
+      </div>
+      <div class="argument-card">
+        <div class="arg-header"><span class="arg-num">07</span><span class="arg-icon">🌐</span></div>
+        <h3>Weltweite Anerkennung</h3>
+        <p>Über 1 Million Arbeitskräfte weltweit stammen von den Philippinen. Besonders gefragt in Deutschland, Japan, Kanada, Saudi-Arabien und den USA.</p>
+        <div class="arg-tags">
+          <span class="arg-tag">Deutschland</span>
+          <span class="arg-tag">Japan</span>
+          <span class="arg-tag">Kanada</span>
+          <span class="arg-tag">USA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUTZEN TABELLE -->
+<section class="table-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Kurz &amp; Klar</span>
+      <span class="section-title">Ihre Vorteile als Arbeitgeber auf einen Blick</span>
+      <div class="section-line"></div>
+    </div>
+    <table class="nutzen-table">
+      <thead>
+        <tr>
+          <th>Vorteil</th>
+          <th>Ihr Nutzen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="check">✓</span>Qualifiziert &amp; motiviert</td><td>Produktivität ab Tag 1</td></tr>
+        <tr><td><span class="check">✓</span>Deutsch &amp; Englisch</td><td>Reibungslose Einarbeitung</td></tr>
+        <tr><td><span class="check">✓</span>Sozial &amp; empathisch</td><td>Ideal für Pflege, Service und Fachkraft-Positionen</td></tr>
+        <tr><td><span class="check">✓</span>Kulturell kompatibel</td><td>Gute Integration ins Team</td></tr>
+        <tr><td><span class="check">✓</span>Rechtssicherer Prozess</td><td>Kein organisatorischer Aufwand für Sie</td></tr>
+        <tr><td><span class="check">✓</span>Geringe Fluktuation</td><td>Langfristige Personalplanung möglich</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonial-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Stimmen</span>
+      <span class="section-title">Was Arbeitgeber sagen</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="quote-grid">
+      <div class="quote-block">„Die Visumsbindung gibt uns endlich Planungssicherheit – kein Vergleich zu früheren Vermittlungen."<cite>Inhaberin, Seniorenresidenz</cite></div>
+      <div class="quote-block">„Von der ersten Anfrage bis zur Ankunft hat GLARC jeden Schritt begleitet. Das hat uns enorm viel Zeit gespart."<cite>Personalleiter, Hotelbetrieb</cite></div>
+      <div class="quote-block">„Unsere neuen Kollegen aus den Philippinen sind ins Team reingewachsen, als wären sie schon immer dabei gewesen."<cite>Geschäftsführer, Handwerksbetrieb</cite></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA VOR FORMULAR -->
+<section class="cta-banner">
+  <div class="container cta-banner-inner">
+    <div>
+      <h2>Sie möchten philippinische Fachkräfte / Arbeitskräfte / Auszubildende einstellen?</h2>
+      <p>GLARC übernimmt für Sie den gesamten Ablauf – von der Auswahl bis zur erfolgreichen Integration.</p>
+    </div>
+    <a href="#anfrage" class="btn-white-lg">Bitte ausfüllen</a>
+  </div>
+</section>
+
+<!-- KONTAKT & ANFRAGE -->
+<section class="request-section" id="anfrage">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Kontakt &amp; Anfrage</span>
+      <span class="section-title">Jetzt Fachkräfte anfragen</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="request-inner">
+      <div class="request-info">
+        <h2>Ihr direkter Ansprechpartner</h2>
+        <p>Schildern Sie uns Ihren Bedarf – per Formular, mit einem Link zu Ihrer Stellenausschreibung oder direkt per Anruf. Wir melden uns innerhalb von 24 Stunden.</p>
+        <div class="contact-chip"><div class="contact-chip-icon">👨‍💼</div><div class="contact-chip-text"><small>Kontakt</small><strong>Hans Tuchel</strong></div></div>
+        <div class="contact-chip"><a href="tel:+491716570558" style="display:flex;align-items:center;gap:10px;text-decoration:none"><div class="contact-chip-icon">📞</div><div class="contact-chip-text"><small>Telefon (klicken = sofort verbinden)</small><strong style="color:var(--g-red)">+49 171 6570558</strong></div></a></div>
+        <div class="contact-chip"><a href="mailto:info@glarc.de" style="display:flex;align-items:center;gap:10px;text-decoration:none"><div class="contact-chip-icon">✉️</div><div class="contact-chip-text"><small>E-Mail</small><strong>info@glarc.de</strong></div></a></div>
+        <div class="contact-chip"><div class="contact-chip-icon">🌐</div><div class="contact-chip-text"><small>Website</small><strong>www.glarc.de</strong></div></div>
+      </div>
+      <div>
+        <div class="req-form" id="reqForm">
+          <div class="form-row">
+            <div><label class="form-label">Vorname</label><input type="text" placeholder="Max"></div>
+            <div><label class="form-label">Nachname</label><input type="text" placeholder="Mustermann"></div>
+          </div>
+          <label class="form-label">Unternehmen</label><input type="text" placeholder="Musterfirma GmbH">
+          <label class="form-label">E-Mail</label><input type="email" placeholder="max@firma.de">
+          <label class="form-label">Telefon</label><input type="tel" placeholder="+49 …">
+          <label class="form-label">Gesucht werden</label>
+          <select><option>musterhafte Fachkräfte 😊</option><option>Köche / Gastronomie</option><option>Handwerker</option><option>IT-Fachkräfte</option><option>Auszubildende</option><option>Logistik / Transport</option><option>Sonstiges</option></select>
+          <label class="form-label">Ihre Nachricht / Anforderungen</label>
+          <textarea placeholder="Anzahl der gesuchten Personen, Qualifikationen, Starttermin …"></textarea>
+          <label class="form-label" style="margin-top:20px">📎 z.B. IHRE Stellenausschreibung hochladen (PDF, DOCX, Bild)</label>
+          <div class="upload-zone" onclick="document.getElementById('fileInput').click()" id="dropZone">
+            <input type="file" id="fileInput" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" onchange="handleFile(this)">
+            <span class="upload-zone-icon">⬆</span>
+            <span id="uploadLabel">Datei hierher ziehen oder klicken</span>
+            <small>PDF · DOCX · JPG · PNG – max. 10 MB</small>
+          </div>
+          <label class="form-label" style="margin-top:16px">🔗 Oder einfach Ihren Link zur Stellenanzeige einfügen</label>
+          <div class="link-row">
+            <input type="text" id="linkInput" placeholder="https://karriere.firma.de/stelle-xyz">
+            <button onclick="addLink()">Hinzufügen</button>
+          </div>
+          <div class="hubspot-note" id="hubspotNote" style="display:none">Wiedervorlage wird automatisch in HubSpot angelegt.</div>
+          <button class="btn-submit" onclick="submitReq()">Anfrage absenden</button>
+        </div>
+        <div class="success-panel" id="successPanel">
+          <div style="font-size:40px;margin-bottom:12px">✅</div>
+          <h3>Anfrage erfolgreich gesendet!</h3>
+          <p>Vielen Dank, <strong id="successName"></strong>.<br>Ihre Anfrage wurde übermittelt und eine Wiedervorlage in HubSpot angelegt.<br>Hans Tuchel meldet sich innerhalb von 24 Stunden.</p>
+          <a href="tel:+491716570558" style="display:inline-block;margin-top:20px;background:var(--g-red);color:#fff;font-family:sans-serif;font-size:14px;font-weight:600;padding:12px 22px;border-radius:7px">Jetzt direkt anrufen: +49 171 6570558</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER UNTEN -->
+<section class="cta-banner">
+  <div class="container cta-banner-inner">
+    <div>
+      <h2>Inklusive kostenfreier Vermittlungsgarantie!</h2>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">glarc<span>.de</span></div>
+        <p class="footer-desc">Ihr Partner für philippinische Fachkräfte, Arbeitskräfte und Auszubildende. Bindung durch nachhaltige, erfolgreiche und menschliche Arbeitsverhältnisse.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="fuer-arbeitgeber.html">Für Arbeitgeber</a>
+        <a href="service.html">Service</a>
+        <a href="fuer-kandidaten.html">Für Kandidaten</a>
+        <a href="ueber-uns.html">Über uns</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <a href="tel:+491716570558">+49 171 6570558</a>
+        <a href="mailto:info@glarc.de">info@glarc.de</a>
+        <a href="https://www.glarc.de">www.glarc.de</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="agb.html#agb">AGB</a>
+        <a href="agb.html#datenschutz">Datenschutz</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 glarc.de – Fachkräfte- und Arbeitskräftevermittlung</span>
+      <span class="footer-contact">Hans Tuchel · <a href="tel:+491716570558">+49 171 6570558</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function playElephant(){
+  try {
+    var ctx = new (window.AudioContext || window.webkitAudioContext)();
+    var t = ctx.currentTime;
+
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.type = 'sawtooth';
+
+    // Töö  –  rrr  –  ööö  (3 Töne)
+    osc.frequency.setValueAtTime(200, t);           // Töö: tief starten
+    osc.frequency.linearRampToValueAtTime(350, t + 0.5);  // Töö: hochziehen
+    osc.frequency.linearRampToValueAtTime(220, t + 1.1);  // rrr: runter (Knick)
+    osc.frequency.linearRampToValueAtTime(400, t + 1.7);  // ööö: wieder hoch
+    osc.frequency.linearRampToValueAtTime(260, t + 2.6);  // ausklingen
+
+    gain.gain.setValueAtTime(0, t);
+    gain.gain.linearRampToValueAtTime(0.7, t + 0.12);
+    gain.gain.setValueAtTime(0.7, t + 2.1);
+    gain.gain.linearRampToValueAtTime(0, t + 2.6);
+
+    osc.start(t);
+    osc.stop(t + 2.6);
+  } catch(e) {}
+}
+
+function openSearch(){
+  document.getElementById('searchOverlay').classList.add('open');
+  document.getElementById('searchInput').focus();
+}
+function closeSearch(){
+  document.getElementById('searchOverlay').classList.remove('open');
+}
+function setSearch(v){
+  document.getElementById('searchInput').value = v;
+}
+function doSearch(){
+  var q = document.getElementById('searchInput').value;
+  if(q){ alert('Suche nach: ' + q); }
+  closeSearch();
+}
+document.getElementById('searchOverlay').addEventListener('click', function(e){
+  if(e.target === this){ closeSearch(); }
+});
+
+function handleFile(input){
+  if(input.files && input.files[0]){
+    document.getElementById('uploadLabel').textContent = '✓ ' + input.files[0].name;
+    document.getElementById('dropZone').style.borderColor = '#185FA5';
+    document.getElementById('dropZone').style.background = '#E6F1FB';
+  }
+}
+
+var dz = document.getElementById('dropZone');
+dz.addEventListener('dragover', function(e){
+  e.preventDefault();
+  dz.style.borderColor = '#185FA5';
+});
+dz.addEventListener('dragleave', function(){
+  dz.style.borderColor = '';
+});
+dz.addEventListener('drop', function(e){
+  e.preventDefault();
+  var f = e.dataTransfer.files[0];
+  if(f){
+    document.getElementById('uploadLabel').textContent = '✓ ' + f.name;
+    dz.style.background = '#E6F1FB';
+  }
+});
+
+function addLink(){
+  var v = document.getElementById('linkInput').value.trim();
+  if(v){
+    document.getElementById('hubspotNote').style.display = 'flex';
+    document.getElementById('linkInput').style.borderColor = '#185FA5';
+  }
+}
+
+function submitReq(){
+  var nameInput = document.querySelector('input[placeholder="Max"]');
+  var name = nameInput ? nameInput.value : '';
+  document.getElementById('reqForm').style.display = 'none';
+  var panel = document.getElementById('successPanel');
+  panel.style.display = 'block';
+  document.getElementById('successName').textContent = name ? name : '';
+}</script>
+</body>
+</html>
