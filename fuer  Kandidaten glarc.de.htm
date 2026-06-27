@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Für Kandidaten – glarc.de</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g-red:#C0392B;--g-red-light:#FBEAEA;--g-red-dark:#922B21;
+  --g-blue:#0C3B6E;--g-blue-mid:#185FA5;--g-blue-light:#E6F1FB;
+  --g-gold:#DCA94E;--g-gold-dark:#B8960C;--g-gold-light:#FAF3DC;
+  --gray-50:#F8F8F7;--gray-100:#EBEBEA;--gray-200:#D4D4D2;
+  --gray-400:#888780;--gray-600:#5F5E5A;--gray-800:#2C2C2A;
+}
+body{font-family:'Georgia',serif;color:var(--gray-800);background:#fff;font-size:16px;line-height:1.7}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+.call-fab{position:fixed;bottom:28px;right:28px;z-index:9999;width:58px;height:58px;border-radius:50%;background:var(--g-red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 20px rgba(192,57,43,.45);transition:transform .2s,background .2s;border:none;cursor:pointer;}
+.call-fab:hover{background:var(--g-red-dark);transform:scale(1.1)}
+.call-fab svg{width:26px;height:26px;fill:#fff}
+.search-overlay{display:none;position:fixed;inset:0;background:rgba(12,59,110,.92);z-index:8888;align-items:flex-start;justify-content:center;padding-top:120px;}
+.search-overlay.open{display:flex}
+.search-box-big{width:min(680px,92vw);position:relative}
+.search-box-big input{width:100%;padding:18px 56px 18px 20px;font-size:20px;border:none;border-radius:10px;outline:none;font-family:inherit;background:#fff;color:var(--gray-800);}
+.search-box-big button{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:var(--g-red);border:none;border-radius:7px;padding:8px 12px;cursor:pointer;color:#fff;font-size:16px;}
+.search-close{position:absolute;top:28px;right:32px;color:#fff;font-size:28px;background:none;border:none;cursor:pointer;opacity:.7;}
+.search-close:hover{opacity:1}
+.search-tags{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.search-tags span{background:rgba(255,255,255,.15);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;font-family:sans-serif;transition:background .2s;}
+.search-tags span:hover{background:rgba(255,255,255,.3)}
+nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid var(--gray-100);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:42px;height:42px;border-radius:8px;background:var(--g-blue);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.logo-mark svg{width:28px;height:28px}
+.logo-text{font-family:sans-serif;font-size:17px;font-weight:700;color:var(--g-blue);letter-spacing:-0.3px}
+.logo-text span{color:var(--g-red)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-family:sans-serif;font-size:13px;color:var(--gray-600);letter-spacing:.3px;text-transform:uppercase;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--g-blue)}
+.nav-links a.active{color:var(--g-blue);font-weight:700}
+.btn-search-nav{background:none;border:2px solid var(--g-red);border-radius:7px;padding:9px 18px 9px 14px;display:flex;align-items:center;gap:6px;font-family:sans-serif;font-size:13px;font-weight:600;color:var(--g-red);cursor:pointer;transition:background .2s,color .2s;white-space:nowrap;}
+.btn-search-nav:hover{background:var(--g-red);color:#fff}
+.btn-search-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;flex-shrink:0}
+.btn-cta-nav{background:var(--g-red);color:#fff;font-family:sans-serif;font-size:13px;font-weight:600;padding:9px 18px;border-radius:7px;border:none;cursor:pointer;transition:background .2s;white-space:nowrap;}
+.btn-cta-nav:hover{background:var(--g-red-dark)}
+.container{max-width:1180px;margin:0 auto;padding:0 5%}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:36px;padding-bottom:14px;border-bottom:1px solid var(--gray-100)}
+.section-tag{font-family:sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--g-red);font-weight:800}
+.section-title{font-size:22px;font-weight:700;color:var(--g-blue);letter-spacing:-.3px}
+.section-line{flex:1;height:1px;background:var(--gray-100)}
+/* SUBHERO */
+.subhero{background:var(--g-blue);padding:68px 5% 56px}
+.subhero-eyebrow{font-family:sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px}
+.subhero h1{font-size:clamp(26px,3.2vw,42px);font-weight:700;line-height:1.2;margin-bottom:16px;max-width:700px;color:#fff;letter-spacing:-.4px}
+.subhero-lead{font-family:sans-serif;font-size:16px;color:rgba(255,255,255,.82);max-width:620px;line-height:1.7;margin-bottom:10px}
+.subhero-tagline{font-family:sans-serif;font-size:13px;color:var(--g-gold);letter-spacing:.5px;margin-bottom:28px}
+.subhero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-red{background:var(--g-red);color:#fff;font-family:sans-serif;font-size:14px;font-weight:600;padding:12px 22px;border-radius:7px;border:none;cursor:pointer;transition:background .2s}
+.btn-red:hover{background:var(--g-red-dark)}
+.btn-outline-white{background:transparent;color:#fff;font-family:sans-serif;font-size:14px;font-weight:500;padding:12px 22px;border-radius:7px;border:1.5px solid rgba(255,255,255,.35);cursor:pointer;transition:border-color .2s}
+.btn-outline-white:hover{border-color:#fff}
+/* STATS */
+.stats-strip{background:var(--g-gold);padding:22px 5%}
+.stats-inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:18px}
+.stat-item{text-align:center}
+.stat-num{display:block;font-family:sans-serif;font-size:26px;font-weight:800;color:var(--g-blue);line-height:1.1}
+.stat-label{font-family:sans-serif;font-size:11.5px;letter-spacing:.5px;color:var(--g-blue);opacity:.8;text-transform:uppercase}
+/* TICKER */
+.ticker-bar{background:var(--g-blue);padding:10px 0;overflow:hidden;font-family:sans-serif;font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.5px;}
+.ticker-inner{display:flex;gap:48px;animation:ticker 30s linear infinite;width:max-content}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ticker-item{white-space:nowrap}
+.ticker-item strong{color:#fff}
+/* WAS WIR TUN */
+.wir-section{padding:72px 0;background:#fff}
+.wir-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
+.wir-text h2{font-size:clamp(20px,2.5vw,28px);font-weight:700;color:var(--g-blue);margin-bottom:18px;line-height:1.25}
+.wir-text p{font-family:sans-serif;font-size:14.5px;color:var(--gray-600);line-height:1.8;margin-bottom:14px}
+.wir-text .highlight-quote{border-left:3px solid var(--g-gold);padding:14px 18px;background:var(--g-gold-light);border-radius:0 8px 8px 0;font-family:sans-serif;font-size:14px;color:var(--g-blue);font-style:italic;margin:22px 0;line-height:1.65}
+.service-list{display:flex;flex-direction:column;gap:12px}
+.service-item{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--gray-50);border-radius:10px;border:1px solid var(--gray-100)}
+.service-icon{font-size:22px;flex-shrink:0;width:40px;height:40px;background:#fff;border:1px solid var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.service-item h4{font-family:sans-serif;font-size:13.5px;font-weight:700;color:var(--g-blue);margin-bottom:3px}
+.service-item p{font-family:sans-serif;font-size:12.5px;color:var(--gray-600);line-height:1.55}
+/* VORTEILE */
+.vorteile-section{padding:72px 0;background:var(--gray-50)}
+.vorteile-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.vorteil-card{background:#fff;border:1px solid var(--gray-100);border-radius:10px;padding:24px 18px;transition:box-shadow .2s,border-color .2s;text-align:center}
+.vorteil-card:hover{box-shadow:0 6px 24px rgba(12,59,110,.09);border-color:var(--g-blue)}
+.vorteil-icon{font-size:32px;margin-bottom:12px;display:block}
+.vorteil-card h3{font-family:sans-serif;font-size:13px;font-weight:700;color:var(--g-blue);margin-bottom:6px}
+.vorteil-card p{font-family:sans-serif;font-size:11.5px;color:var(--gray-600);line-height:1.6}
+/* BEWERBER */
+.bewerber-section{padding:72px 0;background:#fff}
+.bewerber-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.bewerber-card{background:var(--gray-50);border:1px solid var(--gray-100);border-left:4px solid var(--g-blue);border-radius:0 10px 10px 0;padding:20px 22px;display:flex;align-items:flex-start;gap:14px}
+.bewerber-card.gold{border-left-color:var(--g-gold)}
+.bewerber-card .bc-icon{font-size:26px;flex-shrink:0}
+.bewerber-card h4{font-family:sans-serif;font-size:14px;font-weight:700;color:var(--g-blue);margin-bottom:4px}
+.bewerber-card p{font-family:sans-serif;font-size:12.5px;color:var(--gray-600);line-height:1.6}
+.bewerber-card .badge{display:inline-block;background:var(--g-red-light);color:var(--g-red);font-family:sans-serif;font-size:11px;font-weight:700;padding:3px 8px;border-radius:4px;margin-top:6px}
+/* PROZESS */
+.prozess-section{padding:72px 0;background:var(--gray-50)}
+.prozess-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;position:relative}
+.prozess-step{background:#fff;border:1px solid var(--gray-100);border-radius:10px;padding:24px 18px;text-align:center;position:relative}
+.prozess-step::after{content:'→';position:absolute;right:-14px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--g-gold);font-weight:700;z-index:1}
+.prozess-step:last-child::after{display:none}
+.step-num{font-family:sans-serif;font-size:11px;font-weight:900;letter-spacing:1.5px;color:var(--g-red);text-transform:uppercase;margin-bottom:10px;display:block}
+.step-icon{font-size:32px;margin-bottom:12px;display:block}
+.prozess-step h4{font-family:sans-serif;font-size:13px;font-weight:700;color:var(--g-blue);margin-bottom:6px}
+.prozess-step p{font-family:sans-serif;font-size:11.5px;color:var(--gray-600);line-height:1.55}
+.kostenlos-badge{background:var(--g-gold-light);border:1px solid var(--g-gold);border-radius:8px;padding:12px 18px;margin-top:28px;display:flex;align-items:center;gap:12px;font-family:sans-serif;font-size:14px;font-weight:700;color:var(--g-blue)}
+/* BEWERBUNG */
+.apply-section{padding:72px 0;background:var(--g-blue-light)}
+.apply-inner{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.apply-info h2{font-size:24px;font-weight:700;color:var(--g-blue);margin-bottom:12px}
+.apply-info p{font-family:sans-serif;font-size:14px;color:var(--gray-600);line-height:1.65;margin-bottom:20px}
+.contact-chip{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.contact-chip-icon{width:36px;height:36px;border-radius:8px;background:#fff;border:1px solid var(--gray-100);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.contact-chip-text{font-family:sans-serif}
+.contact-chip-text small{display:block;font-size:11px;color:var(--gray-400);letter-spacing:.3px;text-transform:uppercase}
+.contact-chip-text strong{font-size:14px;color:var(--gray-800);font-weight:500}
+.req-form{background:#fff;border-radius:12px;border:1px solid var(--gray-100);padding:28px}
+.form-label{font-family:sans-serif;font-size:12px;font-weight:600;color:var(--gray-600);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:block;margin-top:16px}
+.form-label:first-child{margin-top:0}
+.required-star{color:var(--g-red)}
+input[type=text],input[type=email],input[type=tel],select,textarea{width:100%;padding:11px 14px;border:1px solid var(--gray-200);border-radius:7px;font-size:14px;color:var(--gray-800);background:#fff;outline:none;font-family:sans-serif;transition:border-color .2s;}
+input:focus,select:focus,textarea:focus{border-color:var(--g-blue-mid);box-shadow:0 0 0 3px rgba(24,95,165,.1)}
+textarea{resize:vertical;min-height:90px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.upload-zone{border:2px dashed var(--gray-200);border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;font-family:sans-serif;font-size:13px;color:var(--gray-400);margin-top:16px;background:var(--gray-50);}
+.upload-zone:hover{border-color:var(--g-blue-mid);background:var(--g-blue-light);color:var(--g-blue)}
+.upload-zone input{display:none}
+.upload-zone-icon{font-size:28px;margin-bottom:8px;display:block}
+.upload-zone small{display:block;font-size:11px;margin-top:4px;opacity:.7}
+.datenschutz-box{background:var(--gray-50);border:1px solid var(--gray-200);border-radius:8px;padding:14px;margin-top:16px;display:flex;align-items:flex-start;gap:10px}
+.datenschutz-box input[type=checkbox]{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:var(--g-blue)}
+.datenschutz-box label{font-family:sans-serif;font-size:12px;color:var(--gray-600);line-height:1.55}
+.btn-submit{width:100%;background:var(--g-red);color:#fff;font-family:sans-serif;font-size:15px;font-weight:700;padding:14px;border-radius:8px;border:none;cursor:pointer;margin-top:18px;transition:background .2s;letter-spacing:.3px}
+.btn-submit:hover{background:var(--g-red-dark)}
+.success-panel{display:none;background:#fff;border-radius:12px;border:1px solid #C0DD97;padding:32px;text-align:center}
+.success-panel h3{font-family:sans-serif;font-size:18px;color:#27500A;margin-bottom:8px}
+.success-panel p{font-family:sans-serif;font-size:13px;color:var(--gray-600)}
+/* CTA */
+.cta-banner{background:var(--g-red);padding:52px 0}
+.cta-banner-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta-banner h2{color:#fff;font-size:23px;margin-bottom:6px;font-weight:700}
+.cta-banner p{color:rgba(255,255,255,.8);font-family:sans-serif;font-size:14px}
+.btn-white-lg{background:#fff;color:var(--g-red);font-family:sans-serif;font-weight:700;font-size:15px;padding:14px 28px;border-radius:8px;white-space:nowrap;transition:background .2s;display:inline-block;border:none;cursor:pointer}
+.btn-white-lg:hover{background:var(--g-red-light)}
+/* FOOTER */
+footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
+.footer-inner{max-width:1180px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1)}
+.footer-logo{font-family:sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:12px}
+.footer-logo span{color:var(--g-gold)}
+.footer-desc{font-family:sans-serif;font-size:13px;line-height:1.65}
+.footer-col h4{font-family:sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}
+.footer-col a{display:block;font-family:sans-serif;font-size:13px;margin-bottom:8px;color:rgba(255,255,255,.65);transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-family:sans-serif;font-size:12px;flex-wrap:wrap;gap:10px}
+.footer-contact a{color:var(--g-gold);font-weight:600}
+@media(max-width:900px){
+  .wir-grid,.apply-inner{grid-template-columns:1fr}
+  .vorteile-grid{grid-template-columns:1fr 1fr}
+  .bewerber-grid{grid-template-columns:1fr}
+  .prozess-steps{grid-template-columns:1fr 1fr}
+  .prozess-step::after{display:none}
+  .nav-links{display:none}
+  .footer-top{grid-template-columns:1fr}
+  .cta-banner-inner{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:560px){
+  .vorteile-grid,.prozess-steps{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<a class="call-fab" href="tel:+491716570558" title="Jetzt anrufen" aria-label="Sofort anrufen">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1v3.5a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1H7.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
+</a>
+
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" onclick="closeSearch()">✕</button>
+  <div class="search-box-big">
+    <input type="text" id="searchInput" placeholder="z. B. Fachkraft, Arbeitskraft, Auszubildende …">
+    <button onclick="doSearch()">→</button>
+    <div class="search-tags">
+      <span onclick="setSearch('Arbeitskräfte')">Arbeitskräfte</span>
+      <span onclick="setSearch('IT-Fachkräfte')">IT-Fachkräfte</span>
+      <span onclick="setSearch('Köche &amp; Gastronomie')">Köche &amp; Gastronomie</span>
+      <span onclick="setSearch('Auszubildende')">Auszubildende</span>
+      <span onclick="setSearch('Handwerk')">Handwerk</span>
+      <span onclick="setSearch('Logistik')">Logistik</span>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-links">
+    <button class="btn-cta-nav" onclick="document.getElementById('bewerbung').scrollIntoView({behavior:'smooth'})">START</button>
+    <button class="btn-search-nav" onclick="openSearch()">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+      Suchen
+    </button>
+    <a href="fuer-arbeitgeber.html">Für Arbeitgeber</a>
+    <a href="service.html">Service</a>
+    <a href="fuer-kandidaten.html" class="active">Für Kandidaten</a>
+    <a href="ueber-uns.html">Über uns</a>
+  </div>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-mark">
+      <svg viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="10" stroke="#D4A017" stroke-width="2"></circle>
+        <path d="M8 14 Q14 7 20 14 Q14 21 8 14Z" fill="#D4A017"></path>
+        <circle cx="14" cy="14" r="3" fill="#fff"></circle>
+      </svg>
+    </div>
+    <span class="logo-text">glarc<span>.de</span></span>
+  </a>
+</nav>
+
+<!-- SUBHERO -->
+<div class="subhero">
+  <div class="container">
+    <div class="subhero-eyebrow">Für Bewerberinnen &amp; Bewerber</div>
+    <h1>Mit GLARC nach Deutschland – Ihre Zukunft beginnt jetzt</h1>
+    <p class="subhero-lead">Sie möchten in Deutschland arbeiten, eine Ausbildung absolvieren oder als Au-pair eine neue Kultur kennenlernen? Dann sind Sie bei GLARC genau richtig. Wir begleiten Sie auf Ihrem Weg – vom ersten Gespräch bis zu Ihrer Ankunft in Deutschland und darüber hinaus.</p>
+    <p class="subhero-tagline">Kostenlos · Persönlich · Rechtssicher · Nachhaltig</p>
+    <div class="subhero-btns">
+      <button class="btn-red" onclick="document.getElementById('bewerbung').scrollIntoView({behavior:'smooth'})">Jetzt bewerben</button>
+      <button class="btn-outline-white" onclick="location.href='ueber-uns.html'">Über GLARC</button>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num">20+ Jahre</span>
+      <span class="stat-label">Erfahrung auf den Philippinen</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">3.000+</span>
+      <span class="stat-label">Erfolgreiche Vermittlungen</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">A1–B2</span>
+      <span class="stat-label">Eigene Sprachkurse</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">100%</span>
+      <span class="stat-label">Kostenlos für Bewerber</span>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-inner">
+    <span class="ticker-item"><strong>Pflege</strong> · Altenpflege, Krankenpflege</span>
+    <span class="ticker-item"><strong>Gastronomie</strong> · Köche, Service, Hotelfach</span>
+    <span class="ticker-item"><strong>Handwerk</strong> · Elektro, Sanitär, Bau</span>
+    <span class="ticker-item"><strong>IT &amp; Tech</strong> · Entwickler, Netzwerk</span>
+    <span class="ticker-item"><strong>Logistik</strong> · Fahrer, Lager, Spedition</span>
+    <span class="ticker-item"><strong>Ausbildung</strong> · Auszubildende in allen Berufen</span>
+    <span class="ticker-item"><strong>Pflege</strong> · Altenpflege, Krankenpflege</span>
+    <span class="ticker-item"><strong>Gastronomie</strong> · Köche, Service, Hotelfach</span>
+    <span class="ticker-item"><strong>Handwerk</strong> · Elektro, Sanitär, Bau</span>
+    <span class="ticker-item"><strong>IT &amp; Tech</strong> · Entwickler, Netzwerk</span>
+    <span class="ticker-item"><strong>Logistik</strong> · Fahrer, Lager, Spedition</span>
+    <span class="ticker-item"><strong>Ausbildung</strong> · Auszubildende in allen Berufen</span>
+  </div>
+</div>
+
+<!-- WAS WIR FÜR DICH TUN -->
+<section class="wir-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Was wir für Sie tun</span>
+      <span class="section-title">Ihr kompletter Begleitservice</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="wir-grid">
+      <div class="wir-text">
+        <h2>Von der ersten Anfrage bis zur Ankunft – und darüber hinaus</h2>
+        <p>Egal ob Sie als Fachkraft, Auszubildender oder Au-pair nach Deutschland möchten – wir stehen Ihnen bei jedem Schritt zur Seite. Unsere Beratung ist komplett kostenlos für Sie.</p>
+        <div class="highlight-quote">Die Kontaktaufnahme und Einschreibung sind komplett kostenlos. Wir freuen uns auf Sie!</div>
+        <p>Wir erklären Ihnen den gesamten Ablauf, helfen beim Erstellen Ihrer Unterlagen und suchen gemeinsam die passende Stelle für Sie in Deutschland.</p>
+      </div>
+      <div class="service-list">
+        <div class="service-item">
+          <div class="service-icon">💬</div>
+          <div>
+            <h4>Beratung &amp; Bewerbungshilfe</h4>
+            <p>Wir erklären Ihnen den Ablauf, helfen beim Erstellen Ihrer Unterlagen und suchen gemeinsam die passende Stelle – ob als Fachkraft, Auszubildender oder Au-pair.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">📚</div>
+          <div>
+            <h4>Deutschkurse A1–B2</h4>
+            <p>In unserer eigenen Sprachschule auf den Philippinen – mit Präsenzkursen oder Online-Unterricht. So kommen Sie sicher durch Sprachprüfungen und Visa-Voraussetzungen.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">📋</div>
+          <div>
+            <h4>Visumsbeantragung &amp; Anerkennung</h4>
+            <p>Wir helfen Ihnen bei allen Dokumenten, Anerkennungen und beim Visum – legal, vollständig und korrekt. Sie werden bei jedem Schritt begleitet.</p>
+          </div>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">✈️</div>
+          <div>
+            <h4>Reise &amp; Ankunft in Deutschland</h4>
+            <p>Wir organisieren Ihren Flug, bereiten Sie auf die Ausreise vor und empfangen Sie auf Wunsch in Deutschland. Auch danach sind wir für Sie da.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEINE VORTEILE -->
+<section class="vorteile-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Ihre Vorteile</span>
+      <span class="section-title">Warum GLARC der richtige Partner für Sie ist</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="vorteile-grid">
+      <div class="vorteil-card">
+        <span class="vorteil-icon">🌍</span>
+        <h3>20+ Jahre Erfahrung</h3>
+        <p>Tiefe Verwurzelung durch 20-jährigen persönlichen Aufenthalt auf den Philippinen und in Deutschland.</p>
+      </div>
+      <div class="vorteil-card">
+        <span class="vorteil-icon">💬</span>
+        <h3>Eigene Sprachschule</h3>
+        <p>Qualifizierte Lehrerinnen und Lehrer, Präsenz &amp; Online.</p>
+      </div>
+      <div class="vorteil-card">
+        <span class="vorteil-icon">✅</span>
+        <h3>Legale Vermittlung</h3>
+        <p>Registrierte Agentur in Manila – rechtssicher und fair.</p>
+      </div>
+      <div class="vorteil-card">
+        <span class="vorteil-icon">🛬</span>
+        <h3>Persönliche Begleitung</h3>
+        <p>Vor und nach der Ankunft in Deutschland immer für Sie da.</p>
+      </div>
+      <div class="vorteil-card">
+        <span class="vorteil-icon">👥</span>
+        <h3>Seriöse Arbeitgeber</h3>
+        <p>Enge Zusammenarbeit mit geprüften Unternehmen in Deutschland.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WER KANN SICH BEWERBEN -->
+<section class="bewerber-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Wer kann sich bewerben</span>
+      <span class="section-title">Für wen ist GLARC der richtige Weg?</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="bewerber-grid">
+      <div class="bewerber-card">
+        <div class="bc-icon">🎓</div>
+        <div>
+          <h4>Fachkräfte mit Berufsausbildung</h4>
+          <p>Pflege, Handwerk, Gastronomie, Berufskraftfahrer, Technik und viele mehr.</p>
+        </div>
+      </div>
+      <div class="bewerber-card gold">
+        <div class="bc-icon">📖</div>
+        <div>
+          <h4>Auszubildende</h4>
+          <p>Sie möchten in Deutschland eine Berufsausbildung beginnen? Wir helfen Ihnen dabei.</p>
+        </div>
+      </div>
+      <div class="bewerber-card gold">
+        <div class="bc-icon">🏠</div>
+        <div>
+          <h4>Au-pairs</h4>
+          <p>Ein kulturelles Austauschjahr in Deutschland erleben.</p>
+          <span class="badge">Aktuell nicht möglich</span>
+        </div>
+      </div>
+      <div class="bewerber-card">
+        <div class="bc-icon">🚀</div>
+        <div>
+          <h4>Berufseinsteiger</h4>
+          <p>Motiviert und bereit, sich in Deutschland weiterzuentwickeln – willkommen bei GLARC!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE HINWEIS -->
+<section style="padding:48px 0;background:var(--g-gold-light);border-top:1px solid var(--g-gold);border-bottom:1px solid var(--g-gold)">
+  <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:18px">
+      <span style="font-size:36px">💡</span>
+      <div>
+        <div style="font-family:sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--g-gold-dark);margin-bottom:6px">Tipp für Bewerberinnen &amp; Bewerber</div>
+        <p style="font-family:sans-serif;font-size:15px;font-weight:700;color:var(--g-blue);margin-bottom:4px">Schauen Sie auch auf unserer Service-Seite vorbei!</p>
+        <p style="font-family:sans-serif;font-size:13px;color:var(--gray-600);line-height:1.6">Dort finden Sie weitere nützliche Informationen und Hinweise, die für Sie als Bewerberin oder Bewerber interessant sein könnten.</p>
+      </div>
+    </div>
+    <a href="service.html" style="background:var(--g-blue);color:#fff;font-family:sans-serif;font-size:14px;font-weight:700;padding:14px 26px;border-radius:8px;white-space:nowrap;display:inline-block;transition:background .2s" onmouseover="this.style.background='#185FA5'" onmouseout="this.style.background='var(--g-blue)'">Zum Service →</a>
+  </div>
+</section>
+
+<!-- SCHRITT FÜR SCHRITT -->
+<section class="prozess-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">So funktioniert's</span>
+      <span class="section-title">Ihr Weg nach Deutschland – Schritt für Schritt</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="prozess-steps">
+      <div class="prozess-step">
+        <span class="step-num">Schritt 01</span>
+        <span class="step-icon">📞</span>
+        <h4>Kontakt aufnehmen</h4>
+        <p>Per Formular, E-Mail oder persönlich – wir freuen uns auf Sie!</p>
+      </div>
+      <div class="prozess-step">
+        <span class="step-num">Schritt 02</span>
+        <span class="step-icon">🔍</span>
+        <h4>Bewerbung &amp; Beratung</h4>
+        <p>Wir prüfen Ihre Unterlagen und beraten Sie zu passenden Stellen.</p>
+      </div>
+      <div class="prozess-step">
+        <span class="step-num">Schritt 03</span>
+        <span class="step-icon">📚</span>
+        <h4>Deutsch lernen</h4>
+        <p>Sprachkurs A1–B2 in Ihrem Tempo – Präsenz oder Online.</p>
+      </div>
+      <div class="prozess-step">
+        <span class="step-num">Schritt 04</span>
+        <span class="step-icon">⚖️</span>
+        <h4>Visum &amp; Dokumente</h4>
+        <p>Wir helfen Ihnen mit allem, was Sie für das Visum brauchst.</p>
+      </div>
+      <div class="prozess-step">
+        <span class="step-num">Schritt 05</span>
+        <span class="step-icon">🛬</span>
+        <h4>Abreise &amp; Ankunft</h4>
+        <p>Gut vorbereitet und begleitet reisen Sie nach Deutschland.</p>
+      </div>
+    </div>
+    <div class="kostenlos-badge">
+      <span style="font-size:24px">🎉</span>
+      Die Kontaktaufnahme und Einschreibung sind komplett kostenlos für Sie!
+    </div>
+  </div>
+</section>
+
+<!-- BEWERBUNG -->
+<section class="apply-section" id="bewerbung">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Bewerbung</span>
+      <span class="section-title">Bereit für den nächsten Schritt?</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="apply-inner">
+      <div class="apply-info">
+        <h2>Wir freuen uns auf Sie!</h2>
+        <p>Schreiben Sie uns eine Nachricht oder bewerben Sie sich direkt über das Formular. Unser Team meldet sich innerhalb weniger Tage bei Ihnen.</p>
+        <div class="contact-chip"><div class="contact-chip-icon">👨‍💼</div><div class="contact-chip-text"><small>Kontakt</small><strong>Hans Tuchel</strong></div></div>
+        <div class="contact-chip"><a href="mailto:applicant@glarc.de" style="display:flex;align-items:center;gap:10px;text-decoration:none"><div class="contact-chip-icon">✉️</div><div class="contact-chip-text"><small>E-Mail Bewerber</small><strong>applicant@glarc.de</strong></div></a></div>
+        <div class="contact-chip"><a href="mailto:info@glarc.de" style="display:flex;align-items:center;gap:10px;text-decoration:none"><div class="contact-chip-icon">✉️</div><div class="contact-chip-text"><small>E-Mail Allgemein</small><strong>info@glarc.de</strong></div></a></div>
+        <div class="contact-chip"><a href="tel:+491716570558" style="display:flex;align-items:center;gap:10px;text-decoration:none"><div class="contact-chip-icon">📞</div><div class="contact-chip-text"><small>Telefon</small><strong style="color:var(--g-red)">+49 171 6570558</strong></div></a></div>
+        <p style="font-family:sans-serif;font-size:12px;color:var(--gray-400);margin-top:12px">Weitere Kontaktdaten finden Sie in unserem <a href="impressum.html" style="color:var(--g-blue-mid);font-weight:600">Impressum</a>.</p>
+      </div>
+      <div>
+        <div class="req-form" id="kandForm">
+          <div class="form-row">
+            <div><label class="form-label">Vorname <span class="required-star">*</span></label><input type="text" placeholder=""></div>
+            <div><label class="form-label">Nachname <span class="required-star">*</span></label><input type="text" placeholder=""></div>
+          </div>
+          <label class="form-label">Bewerben als? <span class="required-star">*</span></label>
+          <select>
+            <option value="">Als was möchten Sie sich bewerben?</option>
+            <option>Fachkraft</option>
+            <option>Auszubildende/r</option>
+            <option>Au-pair</option>
+            <option>Berufseinsteiger/in</option>
+            <option>Sonstiges</option>
+          </select>
+          <label class="form-label">E-Mail <span class="required-star">*</span></label><input type="email" placeholder="">
+          <label class="form-label">Telefon <span class="required-star">*</span></label><input type="tel" placeholder="+63 …">
+          <label class="form-label">Referenz</label><input type="text" placeholder="Wer hat Sie eventuell an uns weiterempfohlen?">
+          <label class="form-label">Kurz zu Ihrer Erfahrung</label>
+          <textarea placeholder="Ausbildung, bisherige Tätigkeiten, Deutschkenntnisse …"></textarea>
+          <label class="form-label" style="margin-top:20px">📎 Lebenslauf hochladen (PDF, DOCX)</label>
+          <div class="upload-zone" onclick="document.getElementById('cvInput').click()" id="cvDropZone">
+            <input type="file" id="cvInput" accept=".pdf,.doc,.docx" onchange="handleCv(this)">
+            <span class="upload-zone-icon">⬆</span>
+            <span id="cvUploadLabel">Datei hierher ziehen oder klicken</span>
+            <small>PDF · DOCX – max. 10 MB</small>
+          </div>
+          <div class="datenschutz-box">
+            <input type="checkbox" id="datenschutz">
+            <label for="datenschutz">Ich bin damit einverstanden, dass diese Daten zum Zweck der Kontaktaufnahme gespeichert und verarbeitet werden. Mir ist bekannt, dass ich meine Einwilligung jederzeit widerrufen kann. <span class="required-star">*</span></label>
+          </div>
+          <button class="btn-submit" onclick="submitKand()">Bewerbung absenden</button>
+        </div>
+        <div class="success-panel" id="kandSuccessPanel">
+          <div style="font-size:40px;margin-bottom:12px">✅</div>
+          <h3>Bewerbung erfolgreich gesendet!</h3>
+          <p>Vielen Dank, <strong id="kandSuccessName"></strong>.<br>Wir haben Ihre Bewerbung erhalten und melden uns in Kürze bei Ihnen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="container cta-banner-inner">
+    <div>
+      <h2>Ihr Traum von Deutschland – wir machen ihn wahr.</h2>
+      <p>Kostenlos, persönlich und mit Erfahrung auf beiden Seiten.</p>
+    </div>
+    <a href="#bewerbung" class="btn-white-lg" onclick="document.getElementById('bewerbung').scrollIntoView({behavior:'smooth'});return false;">Jetzt bewerben</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">glarc<span>.de</span></div>
+        <p class="footer-desc">Ihr Partner für philippinische Fachkräfte, Arbeitskräfte und Auszubildende. Bindung durch nachhaltige, erfolgreiche und menschliche Arbeitsverhältnisse.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="fuer-arbeitgeber.html">Für Arbeitgeber</a>
+        <a href="service.html">Service</a>
+        <a href="fuer-kandidaten.html">Für Kandidaten</a>
+        <a href="ueber-uns.html">Über uns</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <a href="tel:+491716570558">+49 171 6570558</a>
+        <a href="mailto:info@glarc.de">info@glarc.de</a>
+        <a href="https://www.glarc.de">www.glarc.de</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="agb.html#agb">AGB</a>
+        <a href="agb.html#datenschutz">Datenschutz</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 glarc.de – Fachkräfte- und Arbeitskräftevermittlung</span>
+      <span class="footer-contact">Hans Tuchel · <a href="tel:+491716570558">+49 171 6570558</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function openSearch(){document.getElementById('searchOverlay').classList.add('open');document.getElementById('searchInput').focus();}
+function closeSearch(){document.getElementById('searchOverlay').classList.remove('open');}
+function setSearch(v){document.getElementById('searchInput').value=v;}
+function doSearch(){var q=document.getElementById('searchInput').value;if(q){alert('Suche nach: '+q);}closeSearch();}
+document.getElementById('searchOverlay').addEventListener('click',function(e){if(e.target===this){closeSearch();}});
+function handleCv(input){if(input.files&&input.files[0]){document.getElementById('cvUploadLabel').textContent='✓ '+input.files[0].name;document.getElementById('cvDropZone').style.borderColor='#185FA5';document.getElementById('cvDropZone').style.background='#E6F1FB';}}
+var cvz=document.getElementById('cvDropZone');
+cvz.addEventListener('dragover',function(e){e.preventDefault();cvz.style.borderColor='#185FA5';});
+cvz.addEventListener('dragleave',function(){cvz.style.borderColor='';});
+cvz.addEventListener('drop',function(e){e.preventDefault();var f=e.dataTransfer.files[0];if(f){document.getElementById('cvUploadLabel').textContent='✓ '+f.name;cvz.style.background='#E6F1FB';}});
+function submitKand(){
+  var cb=document.getElementById('datenschutz');
+  if(!cb.checked){alert('Bitte stimme der Datenschutzerklärung zu.');return;}
+  var nameInput=document.querySelector('input[placeholder="Maria"]');
+  var name=nameInput?nameInput.value:'';
+  document.getElementById('kandForm').style.display='none';
+  var panel=document.getElementById('kandSuccessPanel');
+  panel.style.display='block';
+  document.getElementById('kandSuccessName').textContent=name?name:'';
+}
+</script>
+</body>
+</html>
