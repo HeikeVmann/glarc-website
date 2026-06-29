@@ -16,17 +16,17 @@
 body{font-family:'Georgia',serif;color:var(--gray-800);background:#fff;font-size:16px;line-height:1.7}
 a{text-decoration:none;color:inherit}
 img{max-width:100%}
-/* TICKER */
 .ticker-bar{background:var(--g-blue);padding:10px 0;overflow:hidden;font-family:sans-serif;font-size:12px;color:rgba(255,255,255,.7);letter-spacing:.5px;}
 .ticker-inner{display:flex;gap:48px;animation:ticker 30s linear infinite;width:max-content}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .ticker-item{white-space:nowrap}
 .ticker-item strong{color:#fff}
-/* FAB */
 .call-fab{position:fixed;bottom:28px;right:28px;z-index:9999;width:58px;height:58px;border-radius:50%;background:var(--g-red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 20px rgba(192,57,43,.45);transition:transform .2s,background .2s;border:none;cursor:pointer;}
 .call-fab:hover{background:var(--g-red-dark);transform:scale(1.1)}
 .call-fab svg{width:26px;height:26px;fill:#fff}
-/* SEARCH */
+.wa-fab{position:fixed;bottom:96px;right:28px;z-index:9999;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.45);transition:transform .2s,background .2s;}
+.wa-fab:hover{background:#1ebe5d;transform:scale(1.1)}
+.wa-fab svg{width:30px;height:30px;fill:#fff}
 .search-overlay{display:none;position:fixed;inset:0;background:rgba(12,59,110,.92);z-index:8888;align-items:flex-start;justify-content:center;padding-top:120px;}
 .search-overlay.open{display:flex}
 .search-box-big{width:min(680px,92vw);position:relative}
@@ -37,13 +37,8 @@ img{max-width:100%}
 .search-tags{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
 .search-tags span{background:rgba(255,255,255,.15);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;font-family:sans-serif;transition:background .2s;}
 .search-tags span:hover{background:rgba(255,255,255,.3)}
-/* NAV */
 nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid var(--gray-100);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;}
 .nav-logo{display:flex;align-items:center;gap:10px}
-.logo-mark{width:42px;height:42px;border-radius:8px;background:var(--g-blue);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-.logo-mark svg{width:28px;height:28px}
-.logo-text{font-family:sans-serif;font-size:17px;font-weight:700;color:var(--g-blue);letter-spacing:-0.3px}
-.logo-text span{color:var(--g-red)}
 .nav-links{display:flex;gap:28px;align-items:center}
 .nav-links a{font-family:sans-serif;font-size:13px;color:var(--gray-600);letter-spacing:.3px;text-transform:uppercase;font-weight:500;transition:color .2s}
 .nav-links a:hover{color:var(--g-blue)}
@@ -53,14 +48,14 @@ nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid v
 .btn-search-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;flex-shrink:0}
 .btn-cta-nav{background:var(--g-red);color:#fff;font-family:sans-serif;font-size:13px;font-weight:600;padding:9px 18px;border-radius:7px;border:none;cursor:pointer;transition:background .2s;white-space:nowrap;}
 .btn-cta-nav:hover{background:var(--g-red-dark)}
-/* LAYOUT */
 .container{max-width:1180px;margin:0 auto;padding:0 5%}
 .section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:36px;padding-bottom:14px;border-bottom:1px solid var(--gray-100)}
 .section-tag{font-family:sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--g-red);font-weight:800}
 .section-title{font-size:22px;font-weight:700;color:var(--g-blue);letter-spacing:-.3px}
 .section-line{flex:1;height:1px;background:var(--gray-100)}
-/* SUBHERO */
 .subhero{background:var(--g-blue);padding:68px 5% 56px}
+.subhero-inner{display:flex;align-items:center;gap:48px}
+.subhero-text{flex:1}
 .subhero-eyebrow{font-family:sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px}
 .subhero h1{font-size:clamp(26px,3.2vw,42px);font-weight:700;line-height:1.2;margin-bottom:16px;max-width:700px;color:#fff;letter-spacing:-.4px}
 .subhero-lead{font-family:sans-serif;font-size:16px;color:rgba(255,255,255,.82);max-width:600px;line-height:1.7;margin-bottom:10px}
@@ -70,13 +65,11 @@ nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid v
 .btn-red:hover{background:var(--g-red-dark)}
 .btn-outline-white{background:transparent;color:#fff;font-family:sans-serif;font-size:14px;font-weight:500;padding:12px 22px;border-radius:7px;border:1.5px solid rgba(255,255,255,.35);cursor:pointer;transition:border-color .2s}
 .btn-outline-white:hover{border-color:#fff}
-/* STATS STRIP */
 .stats-strip{background:var(--g-gold);padding:22px 5%}
 .stats-inner{max-width:1180px;margin:0 auto;display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:18px}
 .stat-item{text-align:center}
 .stat-num{display:block;font-family:sans-serif;font-size:26px;font-weight:800;color:var(--g-blue);line-height:1.1}
 .stat-label{font-family:sans-serif;font-size:11.5px;letter-spacing:.5px;color:var(--g-blue);opacity:.8;text-transform:uppercase}
-/* INTRO */
 .intro-section{padding:72px 0;background:#fff}
 .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
 .intro-text h2{font-size:clamp(20px,2.5vw,28px);font-weight:700;color:var(--g-blue);margin-bottom:18px;line-height:1.25}
@@ -87,7 +80,6 @@ nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid v
 .process-icon{font-size:22px;flex-shrink:0;width:40px;height:40px;background:#fff;border:1px solid var(--gray-100);border-radius:8px;display:flex;align-items:center;justify-content:center}
 .process-item h4{font-family:sans-serif;font-size:13.5px;font-weight:700;color:var(--g-blue);margin-bottom:3px}
 .process-item p{font-family:sans-serif;font-size:12.5px;color:var(--gray-600);line-height:1.55}
-/* STRENGTH */
 .strength-section{padding:72px 0;background:var(--gray-50)}
 .strength-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
 .strength-text h2{font-size:clamp(20px,2.5vw,28px);font-weight:700;color:var(--g-blue);margin-bottom:18px;line-height:1.25}
@@ -103,7 +95,6 @@ nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid v
 .timeline-year{font-family:sans-serif;font-size:11.5px;font-weight:700;color:var(--g-red);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
 .timeline-item h4{font-family:sans-serif;font-size:14px;font-weight:700;color:var(--g-blue);margin-bottom:5px}
 .timeline-item p{font-family:sans-serif;font-size:13px;color:var(--gray-600);line-height:1.6}
-/* WERTE */
 .values-section{padding:72px 0;background:#fff}
 .values-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
 .value-card{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:10px;padding:24px 18px;transition:box-shadow .2s,border-color .2s;text-align:center}
@@ -111,7 +102,6 @@ nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid v
 .value-icon{font-size:32px;margin-bottom:12px;display:block}
 .value-card h3{font-family:sans-serif;font-size:14px;font-weight:700;color:var(--g-blue);margin-bottom:8px}
 .value-card p{font-family:sans-serif;font-size:12px;color:var(--gray-600);line-height:1.6}
-/* LEISTUNGEN */
 .services-section{padding:72px 0;background:var(--gray-50)}
 .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .service-card{background:#fff;border:1px solid var(--gray-100);border-radius:10px;padding:24px;display:flex;align-items:flex-start;gap:14px;transition:box-shadow .2s}
@@ -119,7 +109,6 @@ nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid v
 .service-check{width:32px;height:32px;border-radius:50%;background:var(--g-blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;color:#fff}
 .service-card h4{font-family:sans-serif;font-size:14px;font-weight:700;color:var(--g-blue);margin-bottom:4px}
 .service-card p{font-family:sans-serif;font-size:12.5px;color:var(--gray-600);line-height:1.55}
-/* MISSION & VISION */
 .mv-section{padding:72px 0;background:#fff}
 .mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
 .mv-card{border-radius:12px;padding:36px 32px}
@@ -135,7 +124,6 @@ nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid v
 .mv-card p{font-family:sans-serif;font-size:14px;line-height:1.75}
 .mv-card.mission p{color:rgba(255,255,255,.82)}
 .mv-card.vision p{color:var(--gray-600)}
-/* KONTAKT */
 .contact-section{padding:72px 0;background:var(--gray-50)}
 .team-card{background:#fff;border:1px solid var(--gray-100);border-radius:12px;padding:32px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
 .team-avatar{width:88px;height:88px;border-radius:50%;background:var(--g-blue-light);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;color:var(--g-blue);font-family:sans-serif;font-weight:700}
@@ -144,14 +132,12 @@ nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid v
 .team-info p{font-family:sans-serif;font-size:13.5px;color:var(--gray-600);line-height:1.65;max-width:480px;margin-bottom:14px}
 .team-contacts{display:flex;gap:18px;flex-wrap:wrap}
 .team-contacts a{font-family:sans-serif;font-size:13px;font-weight:600;color:var(--g-blue-mid);display:flex;align-items:center;gap:6px}
-/* STANDORTE */
 .locations-section{padding:72px 0;background:#fff}
 .loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .loc-card{background:#fff;border:1px solid var(--gray-100);border-radius:10px;padding:26px;text-align:center}
 .loc-card .pin{font-size:30px;margin-bottom:10px;display:block}
 .loc-card h3{font-family:sans-serif;font-size:15px;font-weight:700;color:var(--g-blue);margin-bottom:6px}
 .loc-card p{font-family:sans-serif;font-size:12.5px;color:var(--gray-600);line-height:1.6}
-/* CLAIM STRIP */
 .claim-strip{background:var(--g-blue);padding:44px 5%}
 .claim-inner{max-width:1180px;margin:0 auto;text-align:center}
 .claim-strip h2{font-size:clamp(18px,2.5vw,26px);font-weight:700;color:#fff;margin-bottom:10px}
@@ -161,14 +147,12 @@ nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid v
 .claim-badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 18px;display:flex;align-items:center;gap:10px}
 .claim-badge .cb-icon{font-size:20px}
 .claim-badge span{font-family:sans-serif;font-size:13px;color:rgba(255,255,255,.9)}
-/* CTA BANNER */
 .cta-banner{background:var(--g-red);padding:52px 0}
 .cta-banner-inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 .cta-banner h2{color:#fff;font-size:23px;margin-bottom:6px;font-weight:700}
 .cta-banner p{color:rgba(255,255,255,.8);font-family:sans-serif;font-size:14px}
 .btn-white-lg{background:#fff;color:var(--g-red);font-family:sans-serif;font-weight:700;font-size:15px;padding:14px 28px;border-radius:8px;white-space:nowrap;transition:background .2s;display:inline-block;border:none;cursor:pointer}
 .btn-white-lg:hover{background:var(--g-red-light)}
-/* FOOTER */
 footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
 .footer-inner{max-width:1180px;margin:0 auto}
 .footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1)}
@@ -189,18 +173,17 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
   .cta-banner-inner{flex-direction:column;align-items:flex-start}
   .stats-inner{justify-content:center;gap:28px}
   .claim-badges{gap:10px}
+  .subhero-inner{flex-direction:column}
 }
-@media(max-width:560px){
-  .values-grid,.services-grid{grid-template-columns:1fr}
-}
+@media(max-width:560px){.values-grid,.services-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
-<a class="call-fab" href="https://wa.me/491716570558" target="_blank" title="WhatsApp" aria-label="WhatsApp" style="bottom:96px;background:#25D366">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<a class="wa-fab" href="https://wa.me/491716570558" target="_blank" title="WhatsApp" aria-label="WhatsApp schreiben">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
-<a class="call-fab" href="tel:+491701507650" title="Jetzt anrufen" aria-label="Sofort anrufen">
+<a class="call-fab" href="tel:+491716570558" title="Jetzt anrufen" aria-label="Sofort anrufen">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1v3.5a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1H7.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
 </a>
 
@@ -222,43 +205,51 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
 
 <nav>
   <div class="nav-links">
-    <button class="btn-cta-nav" onclick="location.href='index.html#anfrage'">START</button>
     <button class="btn-search-nav" onclick="openSearch()">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.35-4.35"></path></svg>
       Suchen
     </button>
+    <button class="btn-cta-nav" onclick="location.href='index.html#anfrage'">START</button>
     <a href="fuer-arbeitgeber.html">Für Arbeitgeber</a>
     <a href="service.html">Service</a>
     <a href="fuer-kandidaten.html">Für Kandidaten</a>
     <a href="ueber-uns.html" class="active">Über uns</a>
   </div>
   <a class="nav-logo" href="index.html">
-    <div class="logo-mark">
-      <svg viewBox="0 0 28 28" fill="none">
-        <circle cx="14" cy="14" r="10" stroke="#D4A017" stroke-width="2"></circle>
-        <path d="M8 14 Q14 7 20 14 Q14 21 8 14Z" fill="#D4A017"></path>
-        <circle cx="14" cy="14" r="3" fill="#fff"></circle>
-      </svg>
-    </div>
-    <span class="logo-text">glarc<span>.de</span></span>
+    <img src="logo.png" alt="glarc.de Logo" style="height:42px;width:auto;">
   </a>
 </nav>
 
-<!-- SUBHERO -->
 <div class="subhero">
   <div class="container">
-    <div class="subhero-eyebrow">Über uns</div>
-    <h1>GLARC – verbindet Menschen, Kulturen und Zukunftsperspektiven</h1>
-    <p class="subhero-lead">Wir begleiten Unternehmen und qualifizierte philippinische Arbeitskräfte auf dem Weg zu einer erfolgreichen und nachhaltigen Zusammenarbeit – professionell, transparent und rechtssicher.</p>
-    <p class="subhero-tagline">Verlässlich · Transparent · Nachhaltig · Persönlich · Authentisch</p>
-    <div class="subhero-btns">
-      <button class="btn-red" onclick="location.href='index.html#anfrage'">Mit START</button>
-      <button class="btn-outline-white" onclick="location.href='fuer-arbeitgeber.html'">Unser Angebot für Arbeitgeber</button>
+    <div class="subhero-inner">
+      <div class="subhero-text">
+        <div class="subhero-eyebrow">Über uns</div>
+        <h1>GLARC – verbindet Menschen, Kulturen und Zukunftsperspektiven</h1>
+        <p class="subhero-lead">Wir begleiten Unternehmen und qualifizierte philippinische Arbeitskräfte auf dem Weg zu einer erfolgreichen und nachhaltigen Zusammenarbeit – professionell, transparent und rechtssicher.</p>
+        <p class="subhero-tagline">Verlässlich · Transparent · Nachhaltig · Persönlich · Authentisch</p>
+        <div class="subhero-btns">
+          <button class="btn-red" onclick="location.href='index.html#anfrage'">Mit START</button>
+          <button class="btn-outline-white" onclick="location.href='fuer-arbeitgeber.html'">Unser Angebot für Arbeitgeber</button>
+        </div>
+      </div>
+      <svg style="flex-shrink:0;filter:drop-shadow(0 2px 8px rgba(0,0,0,.4))" width="200" height="200" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="42,8 98,8 132,42 132,98 98,132 42,132 8,98 8,42" fill="#B0B8C1"/>
+        <polygon points="44,11 96,11 129,44 129,96 96,129 44,129 11,96 11,44" fill="#D0D8E0"/>
+        <polygon points="46,14 94,14 126,46 126,94 94,126 46,126 14,94 14,46" fill="#185FA5"/>
+        <polygon points="50,19 90,19 121,50 121,90 90,121 50,121 19,90 19,50" fill="#0C3B6E"/>
+        <circle cx="70" cy="70" r="49" fill="#fff"/>
+        <text x="70" y="58" text-anchor="middle" font-family="Georgia,serif" font-size="11" font-weight="700" fill="#0C3B6E">glarc.de</text>
+        <text x="70" y="72" text-anchor="middle" font-family="sans-serif" font-size="8" font-weight="800" fill="#C0392B" letter-spacing="1">AKKREDITIERT</text>
+        <text x="70" y="83" text-anchor="middle" font-family="sans-serif" font-size="6" fill="#0C3B6E">DEPT. OF MIGRANT WORKERS</text>
+        <line x1="50" y1="88" x2="90" y2="88" stroke="#DCA94E" stroke-width="0.8"/>
+        <text x="70" y="97" text-anchor="middle" font-family="sans-serif" font-size="7" font-weight="600" fill="#C0392B">PHILIPPINEN</text>
+        <text x="70" y="108" text-anchor="middle" font-family="sans-serif" font-size="6" fill="#555">ID: 10487530</text>
+      </svg>
     </div>
   </div>
 </div>
 
-<!-- STATS STRIP -->
 <div class="stats-strip">
   <div class="stats-inner">
     <div class="stat-item"><span class="stat-num">20+ Jahre</span><span class="stat-label">Persönliche Philippinen-Erfahrung</span></div>
@@ -268,7 +259,6 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
   </div>
 </div>
 
-<!-- TICKER -->
 <div class="ticker-bar">
   <div class="ticker-inner">
     <span class="ticker-item"><strong>Pflege</strong> · Altenpflege, Krankenpflege</span>
@@ -276,28 +266,21 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
     <span class="ticker-item"><strong>Handwerk</strong> · Elektro, Sanitär, Bau</span>
     <span class="ticker-item"><strong>IT &amp; Tech</strong> · Entwickler, Netzwerk</span>
     <span class="ticker-item"><strong>Logistik</strong> · Fahrer, Lager, Spedition</span>
-    <span class="ticker-item"><strong>Optimierung</strong> · Versicherung Fahrzeugflotte und Gewerbe</span>
-    <span class="ticker-item"><strong>Spezial</strong> · Optimierung Versicherungskonzept z.B. Fahrzeugflotte, Maschinen, etc.</span>
+    <span class="ticker-item"><strong>Optimierung</strong> · Fahrzeugflotte, Gewerbe und Maschinen</span>
     <span class="ticker-item"><strong>Ausbildung</strong> · Auszubildende in allen Berufen</span>
     <span class="ticker-item"><strong>Pflege</strong> · Altenpflege, Krankenpflege</span>
     <span class="ticker-item"><strong>Gastronomie</strong> · Köche, Service, Hotelfach</span>
     <span class="ticker-item"><strong>Handwerk</strong> · Elektro, Sanitär, Bau</span>
     <span class="ticker-item"><strong>IT &amp; Tech</strong> · Entwickler, Netzwerk</span>
     <span class="ticker-item"><strong>Logistik</strong> · Fahrer, Lager, Spedition</span>
-    <span class="ticker-item"><strong>Optimierung</strong> · Versicherung Fahrzeugflotte und Gewerbe</span>
-    <span class="ticker-item"><strong>Spezial</strong> · Optimierung Versicherungskonzept z.B. Fahrzeugflotte, Maschinen, etc.</span>
+    <span class="ticker-item"><strong>Optimierung</strong> · Fahrzeugflotte, Gewerbe und Maschinen</span>
     <span class="ticker-item"><strong>Ausbildung</strong> · Auszubildende in allen Berufen</span>
   </div>
 </div>
 
-<!-- WER WIR SIND -->
 <section class="intro-section">
   <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Wer wir sind</span>
-      <span class="section-title">Mehr als ein Vermittler – ein langfristiger Partner</span>
-      <div class="section-line"></div>
-    </div>
+    <div class="section-header"><span class="section-tag">Wer wir sind</span><span class="section-title">Mehr als ein Vermittler – ein langfristiger Partner</span><div class="section-line"></div></div>
     <div style="background:var(--g-blue);border-radius:10px;padding:18px 28px;margin-bottom:36px;display:inline-block">
       <span style="font-family:sans-serif;font-size:13px;color:rgba(255,255,255,.65);letter-spacing:1px;text-transform:uppercase">GLARC STEHT FÜR</span>
       <div style="font-family:sans-serif;font-size:18px;font-weight:700;color:#fff;margin-top:4px;text-transform:uppercase;letter-spacing:1px"><span style="color:var(--g-gold);font-size:24px">G</span>ERMAN <span style="color:var(--g-gold);font-size:24px">L</span>ANGUAGE <span style="color:var(--g-gold);font-size:24px">A</span>ND <span style="color:var(--g-gold);font-size:24px">R</span>ECRUITING <span style="color:var(--g-gold);font-size:24px">C</span>OMPANY</div>
@@ -307,7 +290,7 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
       <div class="intro-text">
         <h2>Von der Auswahl bis zur Integration</h2>
         <p>GLARC vermittelt motivierte Fachkräfte, Arbeitskräfte, Auszubildende und Au-pairs aus den Philippinen nach Deutschland. Wir verstehen uns dabei nicht nur als Vermittler, sondern als langfristiger Partner für Arbeitgeber und Kandidaten gleichermaßen.</p>
-        <div class="highlight-quote">„Wir begleiten den gesamten Prozess persönlich und zuverlässig – von der Auswahl geeigneter Bewerberinnen und Bewerber über qualifizierte Deutschsprachkurse bis zur Visabeantragung, Einreise und Integration.“</div>
+        <div class="highlight-quote">„Wir begleiten den gesamten Prozess persönlich und zuverlässig – von der Auswahl geeigneter Bewerberinnen und Bewerber über qualifizierte Deutschsprachkurse bis zur Visabeantragung, Einreise und Integration."</div>
         <p>Unser Ziel ist es, offene Stellen zu besetzen und dauerhafte Perspektiven für beide Seiten zu schaffen.</p>
       </div>
       <div class="process-list">
@@ -320,14 +303,9 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
   </div>
 </section>
 
-<!-- UNSERE STÄRKE -->
 <section class="strength-section">
   <div class="container">
-    <div class="section-header">
-      <span class="section-tag">Unsere Stärke</span>
-      <span class="section-title">Erfahrung auf beiden Seiten</span>
-      <div class="section-line"></div>
-    </div>
+    <div class="section-header"><span class="section-tag">Unsere Stärke</span><span class="section-title">Erfahrung auf beiden Seiten</span><div class="section-line"></div></div>
     <div class="strength-grid">
       <div class="strength-text">
         <h2>Seit über 20 Jahren fest verwurzelt auf den Philippinen</h2>
@@ -344,7 +322,6 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
   </div>
 </section>
 
-<!-- WERTE -->
 <section class="values-section">
   <div class="container">
     <div class="section-header"><span class="section-tag">Dafür stehen wir</span><span class="section-title">Unsere Werte</span><div class="section-line"></div></div>
@@ -358,7 +335,6 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
   </div>
 </section>
 
-<!-- LEISTUNGEN -->
 <section class="services-section">
   <div class="container">
     <div class="section-header"><span class="section-tag">Unsere Leistungen</span><span class="section-title">Was wir für Sie tun</span><div class="section-line"></div></div>
@@ -373,7 +349,6 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
   </div>
 </section>
 
-<!-- MISSION & VISION -->
 <section class="mv-section">
   <div class="container">
     <div class="section-header"><span class="section-tag">Unsere Ausrichtung</span><span class="section-title">Mission &amp; Vision</span><div class="section-line"></div></div>
@@ -384,7 +359,6 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
   </div>
 </section>
 
-<!-- ANSPRECHPARTNER -->
 <section class="contact-section">
   <div class="container">
     <div class="section-header"><span class="section-tag">Ansprechpartner</span><span class="section-title">Ihr persönlicher Kontakt</span><div class="section-line"></div></div>
@@ -403,7 +377,6 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
   </div>
 </section>
 
-<!-- STANDORTE -->
 <section class="locations-section">
   <div class="container">
     <div class="section-header"><span class="section-tag">Standorte</span><span class="section-title">Persönlich vor Ort in Deutschland</span><div class="section-line"></div></div>
@@ -415,7 +388,6 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
   </div>
 </section>
 
-<!-- CLAIM STRIP -->
 <div class="claim-strip">
   <div class="claim-inner">
     <h2>GLARC.de – Vertrauen, Kompetenz und nachhaltige Vermittlung.</h2>
@@ -432,13 +404,9 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
   </div>
 </div>
 
-<!-- CTA BANNER -->
 <section class="cta-banner">
   <div class="container cta-banner-inner">
-    <div>
-      <h2>Lernen Sie uns kennen</h2>
-      <p>Wir freuen uns auf den Austausch mit Ihnen – unverbindlich und persönlich.</p>
-    </div>
+    <div><h2>Lernen Sie uns kennen</h2><p>Wir freuen uns auf den Austausch mit Ihnen – unverbindlich und persönlich.</p></div>
     <a href="index.html#anfrage" class="btn-white-lg">Jetzt Anfrage stellen</a>
   </div>
 </section>
@@ -446,26 +414,9 @@ footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
-      <div>
-        <div class="footer-logo">glarc<span>.de</span></div>
-        <p class="footer-desc">Ihr Partner für philippinische Fachkräfte, Arbeitskräfte und Auszubildende. Bindung durch nachhaltige, erfolgreiche und menschliche Arbeitsverhältnisse.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <a href="fuer-arbeitgeber.html">Für Arbeitgeber</a>
-        <a href="service.html">Service</a>
-        <a href="fuer-kandidaten.html">Für Kandidaten</a>
-        <a href="ueber-uns.html">Über uns</a>
-      </div>
-      <div class="footer-col">
-        <h4>Kontakt</h4>
-        <a href="tel:+491716570558">+49 171 6570558</a>
-        <a href="mailto:info@glarc.de">info@glarc.de</a>
-        <a href="https://www.glarc.de">www.glarc.de</a>
-        <a href="impressum.html">Impressum</a>
-        <a href="agb.html#agb">AGB</a>
-        <a href="agb.html#datenschutz">Datenschutz</a>
-      </div>
+      <div><div class="footer-logo">glarc<span>.de</span></div><p class="footer-desc">Ihr Partner für philippinische Fachkräfte, Arbeitskräfte und Auszubildende. Bindung durch nachhaltige, erfolgreiche und menschliche Arbeitsverhältnisse.</p></div>
+      <div class="footer-col"><h4>Navigation</h4><a href="fuer-arbeitgeber.html">Für Arbeitgeber</a><a href="service.html">Service</a><a href="fuer-kandidaten.html">Für Kandidaten</a><a href="ueber-uns.html">Über uns</a></div>
+      <div class="footer-col"><h4>Kontakt</h4><a href="tel:+491716570558">+49 171 6570558</a><a href="mailto:info@glarc.de">info@glarc.de</a><a href="https://www.glarc.de">www.glarc.de</a><a href="impressum.html">Impressum</a><a href="agb.html#agb">AGB</a><a href="agb.html#datenschutz">Datenschutz</a></div>
     </div>
     <div class="footer-bottom">
       <span>© 2025 glarc.de – Fachkräfte- und Arbeitskräftevermittlung</span>
