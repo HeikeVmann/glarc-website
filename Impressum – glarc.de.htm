@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impressum – glarc.de</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g-red:#C0392B;--g-red-light:#FBEAEA;--g-red-dark:#922B21;
+  --g-blue:#0C3B6E;--g-blue-mid:#185FA5;--g-blue-light:#E6F1FB;
+  --g-gold:#B8960C;--g-gold-light:#FAF3DC;
+  --gray-50:#F8F8F7;--gray-100:#EBEBEA;--gray-200:#D4D4D2;
+  --gray-400:#888780;--gray-600:#5F5E5A;--gray-800:#2C2C2A;
+}
+body{font-family:'Georgia',serif;color:var(--gray-800);background:#fff;font-size:16px;line-height:1.7}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+.call-fab{position:fixed;bottom:28px;right:28px;z-index:9999;width:58px;height:58px;border-radius:50%;background:var(--g-red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 20px rgba(192,57,43,.45);transition:transform .2s,background .2s;border:none;cursor:pointer;}
+.call-fab:hover{background:var(--g-red-dark);transform:scale(1.1)}
+.call-fab svg{width:26px;height:26px;fill:#fff}
+.search-overlay{display:none;position:fixed;inset:0;background:rgba(12,59,110,.92);z-index:8888;align-items:flex-start;justify-content:center;padding-top:120px;}
+.search-overlay.open{display:flex}
+.search-box-big{width:min(680px,92vw);position:relative}
+.search-box-big input{width:100%;padding:18px 56px 18px 20px;font-size:20px;border:none;border-radius:10px;outline:none;font-family:inherit;background:#fff;color:var(--gray-800);}
+.search-box-big button{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:var(--g-red);border:none;border-radius:7px;padding:8px 12px;cursor:pointer;color:#fff;font-size:16px;}
+.search-close{position:absolute;top:28px;right:32px;color:#fff;font-size:28px;background:none;border:none;cursor:pointer;opacity:.7;}
+.search-close:hover{opacity:1}
+.search-tags{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.search-tags span{background:rgba(255,255,255,.15);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;font-family:sans-serif;transition:background .2s;}
+.search-tags span:hover{background:rgba(255,255,255,.3)}
+nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid var(--gray-100);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.logo-mark{width:42px;height:42px;border-radius:8px;background:var(--g-blue);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.logo-mark svg{width:28px;height:28px}
+.logo-text{font-family:sans-serif;font-size:17px;font-weight:700;color:var(--g-blue);letter-spacing:-0.3px}
+.logo-text span{color:var(--g-red)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-family:sans-serif;font-size:13px;color:var(--gray-600);letter-spacing:.3px;text-transform:uppercase;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--g-blue)}
+.nav-links a.active{color:var(--g-blue);font-weight:700}
+.btn-search-nav{background:none;border:2px solid var(--g-red);border-radius:7px;padding:9px 18px 9px 14px;display:flex;align-items:center;gap:6px;font-family:sans-serif;font-size:13px;font-weight:600;color:var(--g-red);cursor:pointer;transition:background .2s,color .2s;white-space:nowrap;}
+.btn-search-nav:hover{background:var(--g-red);color:#fff}
+.btn-search-nav svg{width:14px;height:14px;stroke:currentColor;fill:none;flex-shrink:0}
+.btn-cta-nav{background:var(--g-red);color:#fff;font-family:sans-serif;font-size:13px;font-weight:600;padding:9px 18px;border-radius:7px;border:none;cursor:pointer;transition:background .2s;white-space:nowrap;}
+.btn-cta-nav:hover{background:var(--g-red-dark)}
+.container{max-width:1180px;margin:0 auto;padding:0 5%}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:36px;padding-bottom:14px;border-bottom:1px solid var(--gray-100)}
+.section-tag{font-family:sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--g-red);font-weight:800}
+.section-title{font-size:22px;font-weight:700;color:var(--g-blue);letter-spacing:-.3px}
+.section-line{flex:1;height:1px;background:var(--gray-100)}
+.subhero{background:var(--g-blue);padding:60px 5% 52px}
+.subhero-eyebrow{font-family:sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px}
+.subhero h1{font-size:clamp(26px,3.2vw,40px);font-weight:700;line-height:1.2;margin-bottom:14px;max-width:680px;color:#fff;letter-spacing:-.4px}
+.subhero p{font-family:sans-serif;font-size:15px;color:rgba(255,255,255,.8);max-width:560px;line-height:1.65}
+.legal-section{padding:72px 0 88px;background:#fff}
+.legal-card{background:var(--gray-50);border:1px solid var(--gray-100);border-radius:12px;padding:6px 32px;max-width:680px}
+.legal-row{display:grid;grid-template-columns:230px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid var(--gray-100)}
+.legal-row:last-child{border-bottom:none}
+.legal-row dt{font-family:sans-serif;font-size:11.5px;font-weight:700;color:var(--g-blue);text-transform:uppercase;letter-spacing:.5px;line-height:1.5}
+.legal-row dd{font-family:sans-serif;font-size:14.5px;color:var(--gray-800);line-height:1.6}
+.legal-row dd a{color:var(--g-blue-mid);font-weight:600}
+.legal-note{font-family:sans-serif;font-size:13px;color:var(--gray-600);line-height:1.7;max-width:680px;margin-top:24px}
+.legal-source{font-family:sans-serif;font-size:12px;color:var(--gray-400);margin-top:28px;max-width:680px;padding-top:20px;border-top:1px solid var(--gray-100)}
+.legal-source a{color:var(--g-blue-mid);font-weight:600}
+footer{background:var(--g-blue);color:rgba(255,255,255,.6);padding:48px 5% 28px}
+.footer-inner{max-width:1180px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.1)}
+.footer-logo{font-family:sans-serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:12px}
+.footer-logo span{color:var(--g-gold)}
+.footer-desc{font-family:sans-serif;font-size:13px;line-height:1.65}
+.footer-col h4{font-family:sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:16px}
+.footer-col a{display:block;font-family:sans-serif;font-size:13px;margin-bottom:8px;color:rgba(255,255,255,.65);transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;font-family:sans-serif;font-size:12px;flex-wrap:wrap;gap:10px}
+.footer-contact a{color:var(--g-gold);font-weight:600}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .footer-top{grid-template-columns:1fr}
+  .legal-row{grid-template-columns:1fr}
+  .legal-row dt{margin-bottom:2px}
+}
+</style>
+</head>
+<body>
+
+<a class="call-fab" href="tel:+491701507650" title="Jetzt anrufen" aria-label="Sofort anrufen">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.47 11.47 0 003.58.57 1 1 0 011 1v3.5a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1H7.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/></svg>
+</a>
+
+<div class="search-overlay" id="searchOverlay">
+  <button class="search-close" onclick="closeSearch()">✕</button>
+  <div class="search-box-big">
+    <input type="text" id="searchInput" placeholder="z. B. Pflegefachkraft, Köche, Auszubildende …">
+    <button onclick="doSearch()">→</button>
+    <div class="search-tags">
+      <span onclick="setSearch('Pflegefachkräfte')">Pflegefachkräfte</span>
+      <span onclick="setSearch('IT-Fachkräfte')">IT-Fachkräfte</span>
+      <span onclick="setSearch('Köche &amp; Gastronomie')">Köche &amp; Gastronomie</span>
+      <span onclick="setSearch('Auszubildende')">Auszubildende</span>
+      <span onclick="setSearch('Handwerk')">Handwerk</span>
+      <span onclick="setSearch('Logistik')">Logistik</span>
+    </div>
+  </div>
+</div>
+
+<nav>
+  <div class="nav-links">
+    <button class="btn-cta-nav" onclick="location.href='index.html#anfrage'">Jetzt anfragen</button>
+    <button class="btn-search-nav" onclick="openSearch()">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+      Suchen
+    </button>
+    <a href="fuer-arbeitgeber.html">Für Arbeitgeber</a>
+    <a href="service.html">Service</a>
+    <a href="fuer-kandidaten.html">Für Kandidaten</a>
+    <a href="ueber-uns.html">Über uns</a>
+  </div>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-mark">
+      <svg viewBox="0 0 28 28" fill="none">
+        <circle cx="14" cy="14" r="10" stroke="#D4A017" stroke-width="2"></circle>
+        <path d="M8 14 Q14 7 20 14 Q14 21 8 14Z" fill="#D4A017"></path>
+        <circle cx="14" cy="14" r="3" fill="#fff"></circle>
+      </svg>
+    </div>
+    <span class="logo-text">glarc<span>.de</span></span>
+  </a>
+</nav>
+
+<div class="subhero">
+  <div class="container">
+    <div class="subhero-eyebrow">Rechtliches</div>
+    <h1>Impressum</h1>
+    <p>Angaben gemäß § 5 TMG.</p>
+  </div>
+</div>
+
+<section class="legal-section">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Anbieterkennzeichnung</span><span class="section-title">Angaben zum Unternehmen</span><div class="section-line"></div></div>
+    <dl class="legal-card">
+      <div class="legal-row"><dt>Unternehmensname</dt><dd>glarc.de – Hans Tuchel</dd></div>
+      <div class="legal-row"><dt>Name des Inhabers</dt><dd>Hans Thorsten Tuchel</dd></div>
+      <div class="legal-row"><dt>Geschäftsadresse</dt><dd>Im Weingarten 18<br>56818 Klotten, Deutschland</dd></div>
+      <div class="legal-row"><dt>Telefon / WhatsApp</dt><dd><a href="tel:+491716570558">+49 171 6570558</a></dd></div>
+      <div class="legal-row"><dt>E-Mail-Adresse</dt><dd><a href="mailto:info@glarc.de">info@glarc.de</a></dd></div>
+      <div class="legal-row"><dt>USt-IdNr.</dt><dd>DE428175692-00001</dd></div>
+      <div class="legal-row"><dt>Department of Migrant Workers – Accreditation</dt><dd>10487530</dd></div>
+      <div class="legal-row"><dt>Termine</dt><dd>Nur nach telefonischer Vereinbarung</dd></div>
+    </dl>
+    <p class="legal-note">Hinweis: Die unter „Für Arbeitgeber“, „Service“, „Für Kandidaten“ und „Über uns“ dargestellten Inhalte dieser Website sind Beispiel- und Vorschaucontent. Die hier hinterlegten Angaben zur Anbieterkennzeichnung sind die tatsächlichen rechtlichen Unternehmensdaten von glarc.de.</p>
+    <p class="legal-source">Quelle der Angaben: <a href="https://www.glarc.de/impressum" target="_blank" rel="noopener">www.glarc.de/impressum</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">glarc<span>.de</span></div>
+        <p class="footer-desc">Globale Arbeitskräftevermittlung. Ihr Partner für philippinische Fachkräfte, Arbeitskräfte und Auszubildende. Bindung durch nachhaltige, erfolgreiche und menschliche Arbeitsverhältnisse.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="fuer-arbeitgeber.html">Für Arbeitgeber</a>
+        <a href="service.html">Service</a>
+        <a href="fuer-kandidaten.html">Für Kandidaten</a>
+        <a href="ueber-uns.html">Über uns</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kontakt</h4>
+        <a href="tel:+491701507650">+49 170 1507650</a>
+        <a href="mailto:heike.eggers@glarc.de">heike.eggers@glarc.de</a>
+        <a href="https://www.glarc.de">www.glarc.de</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="agb.html#agb">AGB</a>
+        <a href="agb.html#datenschutz">Datenschutz</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 glarc.de – Globale Arbeitskräftevermittlung</span>
+      <span class="footer-contact">Heike Eggers · <a href="tel:+491701507650">+49 170 1507650</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function openSearch(){
+  document.getElementById('searchOverlay').classList.add('open');
+  document.getElementById('searchInput').focus();
+}
+function closeSearch(){
+  document.getElementById('searchOverlay').classList.remove('open');
+}
+function setSearch(v){
+  document.getElementById('searchInput').value = v;
+}
+function doSearch(){
+  var q = document.getElementById('searchInput').value;
+  if(q){ alert('Suche nach: ' + q); }
+  closeSearch();
+}
+document.getElementById('searchOverlay').addEventListener('click', function(e){
+  if(e.target === this){ closeSearch(); }
+});
+</script>
+</body>
+</html>
